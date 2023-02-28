@@ -1,9 +1,9 @@
 import React from "react";
 
-type PropsType = {
-    shapka: string;
+type PropsTypeHeading = {
+    heading: string;
     body?: number;
-    tasks: TaskType[] //или Array<TaskType
+    tasks: TaskType[] //Array <PropsTypeTasks>
 }
 
 type TaskType = {
@@ -12,29 +12,28 @@ type TaskType = {
     isDone: boolean
 }
 
-export const Todolist = (props: PropsType) => {
+export const Todolist = (props: PropsTypeHeading) => {
+    const tasksMap = props.tasks.map((el ) => {
+        return(
+            <li>
+                <input type="checkbox" checked={el.isDone}/>
+                <span>{el.title}</span>
+            </li>
+        )
+    })
     return (
-        <div className="App">
+        <div>
             <div>
-                <h3>{props.shapka}</h3>
+                <h3>{props.heading}</h3>
                 <h3>{props.body}</h3>
                 <div>
                     <input/>
                     <button>+</button>
                 </div>
                 <ul>
-                    {props.tasks.map((el) => {
+                    {tasksMap}
 
-                        return (
-                            <li>
-                                <input type="checkbox" checked={el.isDone}/>
-                                <span>{el.title}</span>
-                            </li>
-                        )
-                    })}
-
-
-                    {/* <li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>
+                    {/*<li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>
                     <li><input type="checkbox" checked={props.tasks[1].isDone}/> <span>{props.tasks[1].title}</span></li>
                     <li><input type="checkbox" checked={props.tasks[2].isDone}/> <span>{props.tasks[2].title}</span></li>
                     <li><input type="checkbox" checked={props.tasks[3].isDone}/> <span>{props.tasks[3].title}</span></li>*/}
@@ -47,4 +46,5 @@ export const Todolist = (props: PropsType) => {
             </div>
         </div>
     )
+
 }
