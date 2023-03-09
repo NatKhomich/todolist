@@ -17,8 +17,6 @@ function App() {
         { id: 4, title: 'Yo2', isDone: false}
     ]
 
-/*    let newArr = [1,2,3,4]*/
-
     return (
         <>
             <Todolist heading = {heading1} body = {100500} tasks = {tasks1}/>
