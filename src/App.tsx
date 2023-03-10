@@ -1,26 +1,53 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
+import {releaseAllKeys} from '@testing-library/user-event/dist/keyboard/keyboardImplementation';
 
 function App() {
-    const heading1 = 'What to learn1'
 
-    const tasks1 = [
+    /*let tasks1 = [
         { id: 1, title: 'Html&CSS', isDone: true},
         { id: 2, title: 'JS', isDone: true},
         { id: 3, title: 'ReactJS', isDone: false},
-    ]
-    const tasks2 = [
-        { id: 1, title: 'Hello world', isDone: true},
-        { id: 2, title: 'I am Happy', isDone: false},
-        { id: 3, title: 'Yo', isDone: false},
-        { id: 4, title: 'Yo2', isDone: false}
-    ]
+    ]*/
+
+    let [tasks1, setTasks] = useState(
+        [
+            { id: 1, title: 'Html&CSS', isDone: true},
+            { id: 2, title: 'JS', isDone: true},
+            { id: 3, title: 'ReactJS', isDone: false},
+        ]
+    )
+
+    let [filterValue, setFilterValue] = useState( 'All' )
+
+    const removeTask = (taskId: number) => {
+        setTasks( tasks1.filter( (el)=> el.id !== taskId))
+        /*tasks1 = tasks1.filter( (el) => el.id !== taskId )
+        setTasks(tasks1)*/
+    }
+    const filterTask = (buttonName: string) => {
+        setFilterValue(buttonName)
+    }
+
+    let filteredTasks = tasks1
+    if (filterValue === 'Active') {
+        filteredTasks = tasks1.filter( el => el.isDone )
+    }
+    if (filterValue === 'Completed') {
+        filteredTasks = tasks1.filter( el => !el.isDone )
+    }
+    if (filterValue === 'All') {
+        filteredTasks = tasks1
+    }
 
     return (
         <>
-            <Todolist heading = {heading1} body = {100500} tasks = {tasks1}/>
-            <Todolist heading = {'What to learn2'} tasks = {tasks2}/>
+            <Todolist title = 'What to learn'
+                      tasks = {filteredTasks}
+                      removeTask = {removeTask}
+                      filterTask = {filterTask}
+            />
         </>
         )
 }
