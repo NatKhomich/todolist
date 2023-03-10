@@ -21,7 +21,7 @@ function App() {
 
     let [filterValue, setFilterValue] = useState( 'All' )
 
-    const removeTask = (taskId: number) => {
+    const removeTask = (taskId: number) => { //удаление тасок
         setTasks( tasks1.filter( (el)=> el.id !== taskId))
         /*tasks1 = tasks1.filter( (el) => el.id !== taskId )
         setTasks(tasks1)*/
