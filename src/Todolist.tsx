@@ -1,4 +1,5 @@
 import React from 'react';
+import {ButtonFilterType} from './App';
 
 type TasksType = {
     id: number,
@@ -10,7 +11,7 @@ type TodolistPropsType = {
     title: string;
     tasks: Array <TasksType>
     removeTask: (taskId: number)=> void
-    filterTask: (buttonName: string) => void
+    filterTask: (buttonName: ButtonFilterType) => void
 }
 
 export const Todolist = (props: TodolistPropsType) => {

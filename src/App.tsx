@@ -3,6 +3,8 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {releaseAllKeys} from '@testing-library/user-event/dist/keyboard/keyboardImplementation';
 
+export type ButtonFilterType = 'All' | 'Active'| 'Completed'
+
 function App() {
 
     /*let tasks1 = [
@@ -26,7 +28,7 @@ function App() {
         /*tasks1 = tasks1.filter( (el) => el.id !== taskId )
         setTasks(tasks1)*/
     }
-    const filterTask = (buttonName: string) => {
+    const filterTask = (buttonName: ButtonFilterType) => {
         setFilterValue(buttonName)
     }
 
