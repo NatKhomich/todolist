@@ -1,4 +1,4 @@
-import React, {useState, KeyboardEvent} from 'react';
+import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {ButtonFilterType} from './App';
 
 type TasksType = {
@@ -31,33 +31,35 @@ export const Todolist = (props: TodolistPropsType) => {
         }
     }
 
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(event.currentTarget.value)
+
+    }
+
+    const removeTaskHandler = (tId: string) => {
+        props.removeTask(tId)
+    }
+
     return (
         <div>
             <div>
                 <h3>{props.title}</h3>
                 <div>
-                    <input value={newTitle} onKeyDown={onKeyDownHandler}
-                           onChange={(event) => setNewTitle(event.currentTarget.value)}/>
+                    <input value={newTitle}
+                           onKeyDown={onKeyDownHandler}
+                           onChange={onChangeHandler}/>
                     <button onClick={addTaskHandler}> +</button>
-
-                    {/*<button onClick={(event) => {
-                        props.addTask(newTitle)
-                        setNewTitle('')
-                    }}> + </button>*/}
-
                 </div>
                 <ul>
-                    {props.tasks.map(el => {
+                    {props.tasks.map(t => {
                         return (
-                            <li key={el.id}>
-                                <button onClick={() => props.removeTask(el.id)}> +</button>
-                                <input type="checkbox" checked={el.isDone}/>
-                                <span>{el.title}</span>
+                            <li key={t.id}>
+                                <input type="checkbox" checked={t.isDone}/>
+                                <span>{t.title}</span>
+                                <button onClick={() => removeTaskHandler(t.id)}> X </button>
                             </li>
                         )
                     })}
-                    {/* <li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>*/}
-
                 </ul>
                 <div>
                     <button onClick={() => props.filterTask('All')}>All</button>

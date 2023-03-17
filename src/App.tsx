@@ -33,7 +33,6 @@ function App() {
        setTasks(newObj)*/
     }
 
-
     const filterTask = (buttonName: ButtonFilterType) => { //фильтрация тасок по кнопкам 'All' | 'Active'| 'Completed'
         setFilterValue(buttonName)
     }
