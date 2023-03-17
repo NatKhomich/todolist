@@ -16,7 +16,6 @@ function App() {
             { id: v1(), title: 'Redux', isDone: false},
         ]
     )
-    console.log(tasks)
 
     let [filterValue, setFilterValue] = useState( 'All' )
 

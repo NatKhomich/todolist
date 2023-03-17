@@ -1,5 +1,6 @@
 import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {ButtonFilterType} from './App';
+import {Button} from './components/Button';
 
 type TasksType = {
     id: string,
@@ -17,7 +18,6 @@ type TodolistPropsType = {
 
 export const Todolist = (props: TodolistPropsType) => {
     const [newTitle, setNewTitle] = useState('')
-    console.log(newTitle)
 
     const addTaskHandler = () => {
         props.addTask(newTitle)
@@ -38,6 +38,22 @@ export const Todolist = (props: TodolistPropsType) => {
 
     const removeTaskHandler = (tId: string) => {
         props.removeTask(tId)
+    }
+
+   /* const AllChangeFilterHandler = () => {
+        props.filterTask('All')
+    }
+
+    const ActiveChangeFilterHandler = () => {
+        props.filterTask('Active')
+    }
+
+    const CompletedChangeFilterHandler = () => {
+        props.filterTask('Completed')
+    }*/
+
+    const superFunction = (filterValue: ButtonFilterType) => {
+        props.filterTask(filterValue)
     }
 
     return (
@@ -62,12 +78,17 @@ export const Todolist = (props: TodolistPropsType) => {
                     })}
                 </ul>
                 <div>
-                    <button onClick={() => props.filterTask('All')}>All</button>
-                    <button onClick={() => props.filterTask('Active')}>Active</button>
-                    <button onClick={() => props.filterTask('Completed')}>Completed</button>
+                    <Button name={'All'} callBack={()=>superFunction('All')} />
+                    <Button name={'Active'} callBack={()=>superFunction('Active')} />
+                    <Button name={'Completed'} callBack={()=>superFunction('Completed')} />
+
+                    {/*<button onClick={()=>superFunction('All')}>All</button>
+                    <button onClick={()=>superFunction('Active')}>Active</button>
+                    <button onClick={()=>superFunction('Completed')}>Completed</button>*/}
+
+                   {/* <button onClick={() => props.filterTask('Completed')}>Completed</button>*/}
                 </div>
             </div>
         </div>
     )
-
 }
