@@ -2,45 +2,51 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {releaseAllKeys} from '@testing-library/user-event/dist/keyboard/keyboardImplementation';
+import { v1 } from 'uuid';
 
 export type ButtonFilterType = 'All' | 'Active'| 'Completed'
 
 function App() {
 
-    /*let tasks1 = [
-        { id: 1, title: 'Html&CSS', isDone: true},
-        { id: 2, title: 'JS', isDone: true},
-        { id: 3, title: 'ReactJS', isDone: false},
-    ]*/
-
-    let [tasks1, setTasks] = useState(
+    let [tasks, setTasks] = useState(
         [
-            { id: 1, title: 'Html&CSS', isDone: true},
-            { id: 2, title: 'JS', isDone: true},
-            { id: 3, title: 'ReactJS', isDone: false},
+            { id: v1(), title: 'Html&CSS', isDone: true},
+            { id: v1(), title: 'JS', isDone: true},
+            { id: v1(), title: 'ReactJS', isDone: false},
+            { id: v1(), title: 'Redux', isDone: false},
         ]
     )
+    console.log(tasks)
 
     let [filterValue, setFilterValue] = useState( 'All' )
 
-    const removeTask = (taskId: number) => { //удаление тасок
-        setTasks( tasks1.filter( (el)=> el.id !== taskId))
-        /*tasks1 = tasks1.filter( (el) => el.id !== taskId )
-        setTasks(tasks1)*/
+    const removeTask = (taskId: string) => { //удаление тасок
+        setTasks( tasks.filter( (el)=> el.id !== taskId))
+        /*tasks = tasks.filter( (el) => el.id !== taskId )
+        setTasks(tasks)*/
     }
-    const filterTask = (buttonName: ButtonFilterType) => {
+
+    const addTask = (newTitle: string) => { //добавление тасок
+        const newTask = { id: v1(), title: newTitle, isDone: false}
+        setTasks([ newTask, ...tasks ])
+        /*const newObj = [ newTask, ...tasks ]
+       setTasks(newObj)*/
+    }
+
+
+    const filterTask = (buttonName: ButtonFilterType) => { //фильтрация тасок по кнопкам 'All' | 'Active'| 'Completed'
         setFilterValue(buttonName)
     }
 
-    let filteredTasks = tasks1
+    let filteredTasks = tasks
     if (filterValue === 'Active') {
-        filteredTasks = tasks1.filter( el => el.isDone )
+        filteredTasks = tasks.filter( el => el.isDone )
     }
     if (filterValue === 'Completed') {
-        filteredTasks = tasks1.filter( el => !el.isDone )
+        filteredTasks = tasks.filter( el => !el.isDone )
     }
     if (filterValue === 'All') {
-        filteredTasks = tasks1
+        filteredTasks = tasks
     }
 
     return (
@@ -49,6 +55,7 @@ function App() {
                       tasks = {filteredTasks}
                       removeTask = {removeTask}
                       filterTask = {filterTask}
+                      addTask={addTask}
             />
         </>
         )
