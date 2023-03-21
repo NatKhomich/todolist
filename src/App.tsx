@@ -21,15 +21,11 @@ function App() {
 
     const removeTask = (taskId: string) => { //удаление тасок
         setTasks( tasks.filter( (el)=> el.id !== taskId))
-        /*tasks = tasks.filter( (el) => el.id !== taskId )
-        setTasks(tasks)*/
     }
 
     const addTask = (newTitle: string) => { //добавление тасок
         const newTask = { id: v1(), title: newTitle, isDone: false}
         setTasks([ newTask, ...tasks ])
-        /*const newObj = [ newTask, ...tasks ]
-       setTasks(newObj)*/
     }
 
     const filterTask = (buttonName: ButtonFilterType) => { //фильтрация тасок по кнопкам 'All' | 'Active'| 'Completed'
