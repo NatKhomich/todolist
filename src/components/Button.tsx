@@ -1,5 +1,6 @@
 import React from 'react';
 import {ButtonFilterType} from '../App';
+import s from './Todolist.module.css'
 
 type ButtonType = {
     name: ButtonFilterType

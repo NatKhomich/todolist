@@ -1,6 +1,7 @@
 import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {ButtonFilterType} from './App';
 import {Button} from './components/Button';
+import s from './components/Todolist.module.css'
 
 type TasksType = {
     id: string,
@@ -20,11 +21,16 @@ type TodolistPropsType = {
 export const Todolist = (props: TodolistPropsType) => {
 
     const [newTitle, setNewTitle] = useState('')
+    const [error, setError] = useState<string|null>('')
+
+    const [buttonName, setButtonName] = useState<ButtonFilterType> ( 'All')
 
     const addTaskHandler = () => {
         if (newTitle.trim() !== '') {
             props.addTask(newTitle)
             setNewTitle('')
+        } else {
+            setError('Title is required')
         }
     }
 
@@ -36,25 +42,29 @@ export const Todolist = (props: TodolistPropsType) => {
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setError('')
         setNewTitle(event.currentTarget.value)
 
     }
 
-   /* const AllChangeFilterHandler = () => {
+    const AllChangeFilterHandler = () => {
         props.filterTask('All')
+        setButtonName('All')
     }
 
     const ActiveChangeFilterHandler = () => {
         props.filterTask('Active')
+        setButtonName('Active')
     }
 
     const CompletedChangeFilterHandler = () => {
         props.filterTask('Completed')
-    }*/
-
-    const superFunction = (filterValue: ButtonFilterType) => {
-        props.filterTask(filterValue)
+        setButtonName('Completed')
     }
+
+    /*const superFunction = (filterValue: ButtonFilterType) => {
+        props.filterTask(filterValue)
+    }*/
 
     return (
         <div>
@@ -62,10 +72,12 @@ export const Todolist = (props: TodolistPropsType) => {
                 <h3>{props.title}</h3>
                 <div>
                     <input value={newTitle}
+                           className={error ? s.error : ''}
                            onKeyDown={onKeyDownHandler}
                            onChange={onChangeHandler}/>
                     <button onClick={addTaskHandler}> +</button>
                 </div>
+                {error && <div className={s.errorMessage}> {error}  </div>}
                 <ul>
                     {props.tasks.map(t => { //вынести map???
 
@@ -90,13 +102,13 @@ export const Todolist = (props: TodolistPropsType) => {
                     })}
                 </ul>
                 <div>
-                    <Button name={'All'} callBack={()=>superFunction('All')} />
+                    {/*<Button name={'All'} callBack={()=>superFunction('All')} />
                     <Button name={'Active'} callBack={()=>superFunction('Active')} />
-                    <Button name={'Completed'} callBack={()=>superFunction('Completed')} />
+                    <Button name={'Completed'} callBack={()=>superFunction('Completed')} />*/}
 
-                    {/*<button onClick={()=>superFunction('All')}>All</button>
-                    <button onClick={()=>superFunction('Active')}>Active</button>
-                    <button onClick={()=>superFunction('Completed')}>Completed</button>*/}
+                    <button className={buttonName === 'All' ?  s.activeFilter: ''} onClick={AllChangeFilterHandler}>All</button>
+                    <button className={buttonName === 'Active' ?  s.activeFilter: ''} onClick={ActiveChangeFilterHandler}>Active</button>
+                    <button className={buttonName === 'Completed' ?  s.activeFilter: ''} onClick={CompletedChangeFilterHandler}>Completed</button>
 
                    {/* <button onClick={() => props.filterTask('Completed')}>Completed</button>*/}
                 </div>
