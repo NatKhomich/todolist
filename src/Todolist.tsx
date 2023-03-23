@@ -1,6 +1,5 @@
 import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
 import {ButtonFilterType} from './App';
-import {Button} from './components/Button';
 import s from './components/Todolist.module.css'
 
 type TasksType = {
@@ -66,6 +65,10 @@ export const Todolist = (props: TodolistPropsType) => {
         props.filterTask(filterValue)
     }*/
 
+    /*const changeIsDoneHandler = (tId: string, newIsDone: boolean )=> {
+        props.changeIsDone (tId, newIsDone)
+    }*/
+
     return (
         <div>
             <div>
@@ -84,12 +87,11 @@ export const Todolist = (props: TodolistPropsType) => {
                         const onClickHandler = ()=> props.removeTask(t.id)
 
                         const changeIsDoneHandler = (e: ChangeEvent<HTMLInputElement>)=> {
-                            console.log(e.currentTarget.checked)
                             props.changeIsDone(t.id, e.currentTarget.checked)
                         }
 
                         return (
-                            <li key={t.id}>
+                            <li className={t.isDone ? s.isDone : ''} key={t.id}>
                                 <input type="checkbox"
                                        checked={t.isDone}
                                        onChange={changeIsDoneHandler}

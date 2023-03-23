@@ -10,3 +10,7 @@
 .activeFilter {
     background-color: cadetblue;
 }
+
+.isDone {
+    opacity: 0.5;
+}
