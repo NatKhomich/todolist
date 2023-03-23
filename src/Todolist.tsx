@@ -14,14 +14,18 @@ type TodolistPropsType = {
     removeTask: (taskId: string) => void
     filterTask: (buttonName: ButtonFilterType) => void
     addTask: (newTitle: string) => void
+    changeIsDone: (id: string, newIsDone: boolean) => void
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+
     const [newTitle, setNewTitle] = useState('')
 
     const addTaskHandler = () => {
-        props.addTask(newTitle)
-        setNewTitle('')
+        if (newTitle.trim() !== '') {
+            props.addTask(newTitle)
+            setNewTitle('')
+        }
     }
 
     const onKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -34,10 +38,6 @@ export const Todolist = (props: TodolistPropsType) => {
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(event.currentTarget.value)
 
-    }
-
-    const removeTaskHandler = (tId: string) => {
-        props.removeTask(tId)
     }
 
    /* const AllChangeFilterHandler = () => {
@@ -68,11 +68,23 @@ export const Todolist = (props: TodolistPropsType) => {
                 </div>
                 <ul>
                     {props.tasks.map(t => { //вынести map???
+
+                        const onClickHandler = ()=> props.removeTask(t.id)
+
+                        const changeIsDoneHandler = (e: ChangeEvent<HTMLInputElement>)=> {
+                            console.log(e.currentTarget.checked)
+                            props.changeIsDone(t.id, e.currentTarget.checked)
+                        }
+
                         return (
                             <li key={t.id}>
-                                <input type="checkbox" checked={t.isDone}/>
+                                <input type="checkbox"
+                                       checked={t.isDone}
+                                       onChange={changeIsDoneHandler}
+
+                                />
                                 <span>{t.title}</span>
-                                <button onClick={() => removeTaskHandler(t.id)}> X </button>
+                                <button onClick={onClickHandler}> X </button>
                             </li>
                         )
                     })}

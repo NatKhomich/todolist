@@ -17,6 +17,10 @@ function App() {
         ]
     )
 
+    const changeIsDone = (newId: string, newIsDone: boolean)=> {
+        setTasks( tasks.map(el => el.id === newId ? {...el, isDone: newIsDone} : el) )
+    }
+
     let [filterValue, setFilterValue] = useState( 'All' )
 
     const removeTask = (taskId: string) => { //удаление тасок
@@ -50,6 +54,7 @@ function App() {
                       removeTask = {removeTask}
                       filterTask = {filterTask}
                       addTask={addTask}
+                      changeIsDone={changeIsDone}
             />
         </>
         )
