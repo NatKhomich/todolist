@@ -82,14 +82,11 @@ export const Todolist = (props: TodolistPropsType) => {
                 </div>
                 {error && <div className={s.errorMessage}> {error}  </div>}
                 <ul>
-                    {props.tasks.map(t => { //вынести map???
-
+                    {props.tasks.map(t => {
                         const onClickHandler = ()=> props.removeTask(t.id)
-
                         const changeIsDoneHandler = (e: ChangeEvent<HTMLInputElement>)=> {
                             props.changeIsDone(t.id, e.currentTarget.checked)
                         }
-
                         return (
                             <li className={t.isDone ? s.isDone : ''} key={t.id}>
                                 <input type="checkbox"
@@ -107,12 +104,9 @@ export const Todolist = (props: TodolistPropsType) => {
                     {/*<Button name={'All'} callBack={()=>superFunction('All')} />
                     <Button name={'Active'} callBack={()=>superFunction('Active')} />
                     <Button name={'Completed'} callBack={()=>superFunction('Completed')} />*/}
-
                     <button className={buttonName === 'All' ?  s.activeFilter: ''} onClick={AllChangeFilterHandler}>All</button>
                     <button className={buttonName === 'Active' ?  s.activeFilter: ''} onClick={ActiveChangeFilterHandler}>Active</button>
                     <button className={buttonName === 'Completed' ?  s.activeFilter: ''} onClick={CompletedChangeFilterHandler}>Completed</button>
-
-                   {/* <button onClick={() => props.filterTask('Completed')}>Completed</button>*/}
                 </div>
             </div>
         </div>
