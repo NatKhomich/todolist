@@ -25,7 +25,6 @@ function App() {
     const removeTask = (taskId: string) => { //удаление тасок
         setTasks( tasks.filter( (el)=> el.id !== taskId))
     }
-
     const addTask = (newTitle: string) => { //добавление тасок
         const newTask = { id: v1(), title: newTitle, isDone: false}
         setTasks([ newTask, ...tasks ])
