@@ -104,6 +104,7 @@ export const Todolist = (props: TodolistPropsType) => {
                     {/*<Button name={'All'} callBack={()=>superFunction('All')} />
                     <Button name={'Active'} callBack={()=>superFunction('Active')} />
                     <Button name={'Completed'} callBack={()=>superFunction('Completed')} />*/}
+
                     <button className={buttonName === 'All' ?  s.activeFilter: ''} onClick={AllChangeFilterHandler}>All</button>
                     <button className={buttonName === 'Active' ?  s.activeFilter: ''} onClick={ActiveChangeFilterHandler}>Active</button>
                     <button className={buttonName === 'Completed' ?  s.activeFilter: ''} onClick={CompletedChangeFilterHandler}>Completed</button>

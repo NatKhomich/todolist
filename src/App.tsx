@@ -7,7 +7,6 @@ import { v1 } from 'uuid';
 export type ButtonFilterType = 'All' | 'Active'| 'Completed'
 
 function App() {
-
     let [tasks, setTasks] = useState(
         [
             { id: v1(), title: 'Html&CSS', isDone: true},
