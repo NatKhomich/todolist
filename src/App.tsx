@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
-import s from './App.module.css'
 
 
 export type FilterValuesType = 'All' | 'Active' | 'Completed'
@@ -47,44 +46,16 @@ function App() {
         ]
     })
 
-    /*let [tasks, setTasks] = useState( [
-            { id: v1(), title: 'Html&CSS', isDone: true},
-            { id: v1(), title: 'JS', isDone: true},
-            { id: v1(), title: 'ReactJS', isDone: false},
-            { id: v1(), title: 'Redux', isDone: false},
-        ]
-    )*/
-
     const removeTask = (todoListId: string, taskId: string) => { //удаление тасок
-        /* const tasksForUpdate = tasks[todoListId]
-         const updatedTasks = tasksForUpdate.filter( el => el.id !== taskId )
-         const copyTasks = { ...tasks }
-         copyTasks[todoListId] = updatedTasks
-         setTasks( copyTasks )*/
-        setTasks({...tasks, [todoListId]: tasks[todoListId].filter(el => el.id !== taskId)})
-        /*setTasks( tasks.filter( (el)=> el.id !== taskId))*/
+              setTasks({...tasks, [todoListId]: tasks[todoListId].filter(el => el.id !== taskId)})
     }
 
     const addTask = (todoListId: string, newTitle: string) => { //добавление тасок
         const newTask = {id: v1(), title: newTitle, isDone: false}
-        /*setTasks([ newTask, ...tasks ])*/
-        /*const tasksForUpdate = tasks[todoListId]
-        const updatedTasks = [newTask, ...tasksForUpdate]
-        const copyTasks = {...tasks}
-        copyTasks[todoListId] = updatedTasks
-        setTasks( copyTasks )*/
-
         setTasks({...tasks, [todoListId]: [newTask, ...tasks[todoListId]]})
     }
 
     const changeTaskStatus = (todoListId: string, newId: string, newIsDone: boolean) => {
-        /* setTasks( tasks.map(el => el.id === newId ? {...el, isDone: newIsDone} : el) )*/
-        /* const tasksForUpdate = tasks[todoListId]
-         const updatedTasks = tasksForUpdate.map( el => el.id === newId ? {...el, isDone: newIsDone} : el )
-         const copyTasks = {...tasks}
-         copyTasks[todoListId] = updatedTasks
-         setTasks( copyTasks )*/
-
         setTasks({
             ...tasks,
             [todoListId]: tasks[todoListId].map(el => el.id === newId ? {...el, isDone: newIsDone} : el)
@@ -92,7 +63,6 @@ function App() {
     }
 
     const changeTodolistFilter = (todoListId: string, filter: FilterValuesType) => { //фильтрация тасок по кнопкам 'All' | 'Active'| 'Completed'
-        /* setFilterValue(buttonName)*/
         setTodoLists(todoLists.map(el => el.id === todoListId ? {...el, filter: filter} : el))
     }
 
@@ -110,7 +80,6 @@ function App() {
             return tasks
         }
     }
-
 
     const todoListsComponents = todoLists.map(el => {
 
