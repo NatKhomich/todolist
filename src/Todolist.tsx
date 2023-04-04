@@ -64,9 +64,6 @@ export const Todolist = (props: TodolistPropsType) => {
     /*const superFunction = (filterValue: ButtonFilterType) => {
         props.filterTask(filterValue)
     }*/
-    /*const changeIsDoneHandler = (tId: string, newIsDone: boolean )=> {
-        props.changeIsDone (tId, newIsDone)
-    }*/
 
     return (
         <div className='todoList'>
