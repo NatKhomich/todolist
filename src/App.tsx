@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from './Todolist';
+import {Todolist} from './components/Todolist';
 import {v1} from 'uuid';
+import {AddItemForm} from './components/AddItemForm';
 
 
 export type FilterValuesType = 'All' | 'Active' | 'Completed'
@@ -47,7 +48,7 @@ function App() {
     })
 
     const removeTask = (todoListId: string, taskId: string) => { //удаление тасок
-              setTasks({...tasks, [todoListId]: tasks[todoListId].filter(el => el.id !== taskId)})
+        setTasks({...tasks, [todoListId]: tasks[todoListId].filter(el => el.id !== taskId)})
     }
 
     const addTask = (todoListId: string, newTitle: string) => { //добавление тасок
@@ -81,12 +82,20 @@ function App() {
         }
     }
 
+    const addTodolist = (newTitle: string,) => {
+        const newID = v1()
+        const newTodolist:TodolistType = {id: newID, title: newTitle, filter: 'All'}
+        setTodoLists( [newTodolist,...todoLists] )
+        setTasks( {...tasks, [newID]: []} )
+    }
+
     const todoListsComponents = todoLists.map(el => {
 
         const filteredTasks = getFilteredTasks(tasks[el.id], el.filter)
 
         return (
             <div>
+
                 <Todolist
                     key={el.id}
                     todoListId={el.id}
@@ -106,7 +115,11 @@ function App() {
     })
 
     return (
-        <div className='App'>
+        <div className="App">
+            <AddItemForm
+                callBack={addTodolist}
+
+            />
             {todoListsComponents}
         </div>
     )
