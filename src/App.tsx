@@ -20,7 +20,7 @@ type TodolistType = {
 }
 
 type TasksStateType = {
-    [todoListId1: string]: TasksType[]
+    [todoListId: string]: TasksType[]
 }
 
 function App() {
@@ -56,7 +56,7 @@ function App() {
         setTasks({...tasks, [todoListId]: [newTask, ...tasks[todoListId]]})
     }
 
-    const changeTaskStatus = (todoListId: string, newId: string, newIsDone: boolean) => {
+    const changeTaskStatus = (todoListId: string, newId: string, newIsDone: boolean) => { //изменение статуса таски
         setTasks({
             ...tasks,
             [todoListId]: tasks[todoListId].map(el => el.id === newId ? {...el, isDone: newIsDone} : el)
@@ -65,11 +65,6 @@ function App() {
 
     const changeTodolistFilter = (todoListId: string, filter: FilterValuesType) => { //фильтрация тасок по кнопкам 'All' | 'Active'| 'Completed'
         setTodoLists(todoLists.map(el => el.id === todoListId ? {...el, filter: filter} : el))
-    }
-
-    const removeTodolist = (todoListId: string) => {
-        setTodoLists(todoLists.filter(el => el.id !== todoListId))
-        delete tasks[todoListId]
     }
 
     const getFilteredTasks = (tasks: Array<TasksType>, filter: FilterValuesType): Array<TasksType> => {
@@ -82,14 +77,19 @@ function App() {
         }
     }
 
-    const addTodolist = (newTitle: string) => {
+    const removeTodolist = (todoListId: string) => { //удаление тудулиста
+        setTodoLists(todoLists.filter(el => el.id !== todoListId))
+        delete tasks[todoListId]
+    }
+
+    const addTodolist = (newTitle: string) => { //добавление тудулиста
         const newID = v1()
         const newTodolist:TodolistType = {id: newID, title: newTitle, filter: 'All'}
         setTodoLists( [newTodolist,...todoLists] )
         setTasks( {...tasks, [newID]: []} )
     }
 
-    const updateTask = (todolistID: string, taskID: string, newTitle: string) => {
+    const updateTask = (todolistID: string, taskID: string, newTitle: string) => { //изменение тасок по дабл клику
         setTasks( {...tasks, [todolistID]: tasks[todolistID].map( el => el.id === taskID ? {...el, title: newTitle} : el ) } )
     }
 
@@ -99,7 +99,6 @@ function App() {
 
         return (
             <div>
-
                 <Todolist
                     key={el.id}
                     todoListId={el.id}

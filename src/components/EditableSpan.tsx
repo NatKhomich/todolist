@@ -13,13 +13,11 @@ const EditableSpan = (props: EditableSpanType) => {
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(event.currentTarget.value)
-
     }
 
     const addTaskHandler = () => {
         props.callBack(newTitle)
     }
-
 
     const editHandler = () => {
         setEdit(!edit)
