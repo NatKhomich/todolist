@@ -93,6 +93,10 @@ function App() {
         setTasks( {...tasks, [todolistID]: tasks[todolistID].map( el => el.id === taskID ? {...el, title: newTitle} : el ) } )
     }
 
+    const updateTodolistTitle = (todolistID: string, newTitle: string) => { //изменение названия тудулиста по даблклику
+        setTodoLists( todoLists.map( el => el.id === todolistID ? {...el, title: newTitle} : el ) )
+    }
+
     const todoListsComponents = todoLists.map(el => {
 
         const filteredTasks = getFilteredTasks(tasks[el.id], el.filter)
@@ -114,6 +118,8 @@ function App() {
                     removeTodolist={removeTodolist}
 
                     updateTask={updateTask}
+
+                    updateTodolistTitle={updateTodolistTitle}
                 />
             </div>
         )
