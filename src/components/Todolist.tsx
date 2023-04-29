@@ -1,4 +1,4 @@
-import React, {useState, KeyboardEvent, ChangeEvent} from 'react';
+import React, {useState, ChangeEvent} from 'react';
 import {FilterValuesType, TasksType} from '../App';
 import s from './Todolist.module.css'
 import {AddItemForm} from './AddItemForm';
