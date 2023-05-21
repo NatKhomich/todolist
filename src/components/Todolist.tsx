@@ -4,7 +4,6 @@ import s from './Todolist.module.css'
 import {AddItemForm} from './AddItemForm';
 import EditableSpan from './EditableSpan';
 
-
 type TodolistPropsType = {
     todoListId: string
     title: string;
