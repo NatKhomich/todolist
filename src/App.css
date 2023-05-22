@@ -6,3 +6,19 @@
 .App > div {
   margin-right: 50px;
 }
+
+.colorButton {
+  background-color: deeppink;
+}
+
+.opacityTask {
+  opacity: 0.5;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.errorMessage {
+  color: red;
+}
