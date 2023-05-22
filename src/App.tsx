@@ -1,26 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
+import {TodoList} from './components/TodoList';
+import {v1} from 'uuid';
 
 function App() {
+
+    const [tasks, setTasks] = useState( [
+        {id: v1(), title: 'HTML&CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'ReactJS', isDone: false},
+        {id: v1(), title: 'RestAPI', isDone: false}
+    ] )
+
+    const removeTask = (taskID: string) => {
+        //console.log(taskID)
+        setTasks( tasks.filter(el => el.id !== taskID))
+    }
+
+    const changeTaskStatus = (taskID: string,newIsDone: boolean) => {
+        //console.log(newIsDone)
+        setTasks( tasks.map(el => el.id === taskID ? {...el, isDone: newIsDone} : el))
+    }
+
     return (
         <div className="App">
-            <div>
-                <h3>What to learn</h3>
-                <div>
-                    <input/>
-                    <button>+</button>
-                </div>
-                <ul>
-                    <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
-                    <li><input type="checkbox" checked={true}/> <span>JS</span></li>
-                    <li><input type="checkbox" checked={false}/> <span>React</span></li>
-                </ul>
-                <div>
-                    <button>All</button>
-                    <button>Active</button>
-                    <button>Completed</button>
-                </div>
-            </div>
+            <TodoList title={'What to learn'}
+                      tasks={tasks}
+                      removeTask={removeTask}
+                      changeTaskStatus={changeTaskStatus}
+
+            />
         </div>
     );
 }
