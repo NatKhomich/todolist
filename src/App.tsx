@@ -46,20 +46,23 @@ function App() {
     })
 
     const removeTask = (todoListID: string, taskID: string) => {
-        setTasks( {...tasks, [todoListID]: tasks[todoListID].filter(el => el.id !== taskID) } )
+        setTasks({...tasks, [todoListID]: tasks[todoListID].filter(el => el.id !== taskID)})
     }
 
     const addTask = (todoListID: string, newTitle: string) => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
-        setTasks( {...tasks, [todoListID]: [newTask, ...tasks[todoListID]] } )
+        setTasks({...tasks, [todoListID]: [newTask, ...tasks[todoListID]]})
     }
 
     const filterTasks = (todoListID: string, filter: FilterTaskType) => {
-       setTodoList( todoList.map( el => el.id === todoListID ? {...el, filter: filter} : el ) )
-         }
+        setTodoList(todoList.map(el => el.id === todoListID ? {...el, filter: filter} : el))
+    }
 
     const onChangeTaskStatus = (todoListID: string, taskID: string, newIsDone: boolean) => {
-        setTasks( {...tasks, [todoListID]: tasks[todoListID].map(el => el.id === taskID ? {...el, isDone : newIsDone} : el)})
+        setTasks({
+            ...tasks,
+            [todoListID]: tasks[todoListID].map(el => el.id === taskID ? {...el, isDone: newIsDone} : el)
+        })
     }
 
     const removeTodoList = (todoListID: string) => {
@@ -70,15 +73,22 @@ function App() {
     const addTodoList = (newTitle: string) => {
         const newTodoListID = v1()
         const newTodoList: TodoListPropsType = {id: newTodoListID, title: newTitle, filter: 'All'}
-        setTodoList( [newTodoList, ...todoList] )
-        setTasks( {...tasks, [newTodoListID] : []} )
+        setTodoList([newTodoList, ...todoList])
+        setTasks({...tasks, [newTodoListID]: []})
+    }
+
+    const changeTaskTitle = (todoListID: string, taskID: string, changeTitle: string) => {
+        setTasks({
+            ...tasks,
+            [todoListID]: tasks[todoListID].map(el => el.id === taskID ? {...el, title: changeTitle} : el)
+        })
     }
 
     return (
 
         <div className="App">
 
-            <AddItemForm addNewItem={addTodoList} />
+            <AddItemForm addNewItem={addTodoList}/>
 
             {todoList.map(el => {
 
@@ -101,6 +111,7 @@ function App() {
                               addTask={addTask}
                               filterTasks={filterTasks}
                               onChangeTaskStatus={onChangeTaskStatus}
+                              changeTaskTitle={changeTaskTitle}
 
                               removeTodoList={removeTodoList}
 
