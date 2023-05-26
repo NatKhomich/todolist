@@ -7,18 +7,19 @@
   margin-right: 50px;
 }
 
-.colorButton {
-  background-color: deeppink;
+.error {
+  border: 1px red solid;
+}
+
+.errorMessage {
+  color: red;
 }
 
 .opacityTask {
   opacity: 0.5;
 }
 
-.error {
-  border: 1px solid red;
+.colorButton {
+  background-color: aqua;
 }
 
-.errorMessage {
-  color: red;
-}
