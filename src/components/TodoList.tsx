@@ -2,6 +2,7 @@ import React, {ChangeEvent, FC} from 'react';
 import {FilterTaskType, TaskPropsType} from '../App';
 import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
+import styled from 'styled-components';
 
 export type TodoListType = {
     todoListID: string
@@ -31,7 +32,7 @@ export const TodoList: FC<TodoListType> = (props) => {
 
                 <EditableSpan title={el.title} onChange={(changeTitle)=> props.changeTaskTitle(props.todoListID, el.id, changeTitle)} />
 
-                <button onClick={() => props.removeTask(props.todoListID, el.id)}> X</button>
+                <ButtonDelete onClick={() => props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
             </li>
         )
     })
@@ -70,7 +71,7 @@ export const TodoList: FC<TodoListType> = (props) => {
         <div>
             <h3>
                 <EditableSpan title={props.title} onChange={ (changeTitle)=> props.changeTodoListTitle(props.todoListID, changeTitle) } />
-            <button onClick={ removeTodoListHandler }> X </button>
+            <ButtonDelete onClick={ removeTodoListHandler }> X </ButtonDelete>
             </h3>
 
             <AddItemForm addNewItem={(newTitle)=> props.addTask(props.todoListID, newTitle)}/>
@@ -79,12 +80,12 @@ export const TodoList: FC<TodoListType> = (props) => {
                 {MappedTask}
             </ul>
             <div>
-                <button className={props.filter==='All' ? 'colorButton' : ''}
-                        onClick={allFilterTasksHandler}>All</button>
-                <button className={props.filter==='Active' ? 'colorButton' : ''}
-                        onClick={activeFilterTasksHandler}>Active</button>
-                <button className={props.filter==='Completed' ? 'colorButton' : ''}
-                        onClick={completedFilterTasksHandler}>Completed</button>
+                <ButtonFilter color={props.filter==='All' ? 'aqua' : 'gray'}
+                        onClick={allFilterTasksHandler}>All</ButtonFilter>
+                <ButtonFilter color={props.filter==='Active' ? 'aqua' : 'gray'}
+                        onClick={activeFilterTasksHandler}>Active</ButtonFilter>
+                <ButtonFilter color={props.filter==='Completed' ? 'aqua' : 'gray'}
+                        onClick={completedFilterTasksHandler}>Completed</ButtonFilter>
 
                {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
@@ -93,3 +94,31 @@ export const TodoList: FC<TodoListType> = (props) => {
         </div>
     )
 }
+
+const ButtonFilter = styled.button`
+  border-radius: 3px;
+  background-color: ${props => {
+      if(props.color === 'aqua'){
+          return 'aqua'
+      } else {
+          return 'gray'
+      }
+  }
+  };
+  color: black;
+  font-size: 15px;
+  border: 1px solid black;
+  margin-right: 5px;
+  height: 30px;
+  min-width: 50px;
+`
+
+const ButtonDelete = styled.button`
+  border-radius: 3px;
+  background-color: gray;
+  color: black;
+  border: 1px solid black;
+  margin-right: 5px;
+  height: 20px;
+  width: 27px;
+`
