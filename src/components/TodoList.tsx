@@ -56,15 +56,7 @@ export const TodoList: FC<TodoListType> = (props) => {
     }
 
     /*const filteredTaskButton = (filter: FilterTaskType) => {
-        if (filter === 'All') {
-            props.filterTasks(props.todoListID, 'All')
-        }
-        if (filter === 'Active') {
-            props.filterTasks(props.todoListID, 'Active')
-        }
-        if (filter === 'Completed') {
-            props.filterTasks(props.todoListID, 'Completed')
-        }
+            props.filterTasks(props.todoListID, filter)
     }*/ // общая функция для трех кнопок фильтрации
 
     return (
@@ -89,7 +81,7 @@ export const TodoList: FC<TodoListType> = (props) => {
 
                {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
-                <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} /> */}
+                <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} />*/}
 
             </div>
         </div>

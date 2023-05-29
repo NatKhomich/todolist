@@ -119,8 +119,6 @@ function App() {
 
                               removeTodoList={removeTodoList}
                               changeTodoListTitle={changeTodoListTitle}
-
-
                     />
                 )
             })}
