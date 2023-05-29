@@ -90,6 +90,7 @@ export const TodoList: FC<TodoListType> = (props) => {
                {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
                 <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} /> */}
+
             </div>
         </div>
     )
