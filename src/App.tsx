@@ -37,7 +37,6 @@ function App() {
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
             {id: v1(), title: 'ReactJS', isDone: false},
-
         ],
         [todoListID2]: [
             {id: v1(), title: 'Rest API', isDone: true},
