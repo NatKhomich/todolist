@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import './App.css';
 import {TodoList} from './components/TodoList';
 import {v1} from 'uuid';
 import AddItemForm from './components/AddItemForm';
+import {todoListsReducer} from './state/todoListsReducer';
 
 export type TasksStateType = {
     [key: string]: TaskPropsType[]
@@ -54,7 +55,7 @@ function App() {
     }
 
     const filterTasks = (todoListID: string, filter: FilterTaskType) => {
-        setTodoList(todoList.map(el => el.id === todoListID ? {...el, filter: filter} : el))
+        //setTodoList(todoList.map(el => el.id === todoListID ? {...el, filter: filter} : el))
     }
 
     const onChangeTaskStatus = (todoListID: string, taskID: string, newIsDone: boolean) => {
@@ -65,14 +66,15 @@ function App() {
     }
 
     const removeTodoList = (todoListID: string) => {
-        setTodoList(todoList.filter(el => el.id !== todoListID))
+        //setTodoList(todoList.filter(el => el.id !== todoListID))
+
         delete tasks[todoListID]
     }
 
     const addTodoList = (newTitle: string) => {
         const newTodoListID = v1()
         const newTodoList: TodoListPropsType = {id: newTodoListID, title: newTitle, filter: 'All'}
-        setTodoList([newTodoList, ...todoList])
+        //setTodoList([newTodoList, ...todoList])
         setTasks({...tasks, [newTodoListID]: []})
     }
 
@@ -84,7 +86,7 @@ function App() {
     }
 
     const changeTodoListTitle = (todoListID: string, changeTitle: string) => {
-        setTodoList(todoList.map(el => el.id === todoListID ? {...el, title: changeTitle} : el))
+        //setTodoList(todoList.map(el => el.id === todoListID ? {...el, title: changeTitle} : el))
     }
 
     return (
