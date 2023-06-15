@@ -16,7 +16,7 @@ export type TodoListType = {
     changeTaskTitle: (todoListID: string, taskID: string, changeTitle: string)=> void
 
     removeTodoList: (todoListID: string) => void
-    filterTasksTodoList: (todoListID: string, filter: FilterTaskType) => void
+    changeTodoListFilter: (todoListID: string, filter: FilterTaskType) => void
     changeTodoListTitle: (todoListID: string, changeTitle: string)=> void
 }
 
@@ -46,13 +46,13 @@ export const TodoList: FC<TodoListType> = (props) => {
     }
 
     const allFilterTasksHandler = () => {
-        props.filterTasksTodoList(props.todoListID, 'All')
+        props.changeTodoListFilter(props.todoListID, 'All')
     }
     const activeFilterTasksHandler = () => {
-        props.filterTasksTodoList(props.todoListID, 'Active')
+        props.changeTodoListFilter(props.todoListID, 'Active')
     }
     const completedFilterTasksHandler = () => {
-        props.filterTasksTodoList(props.todoListID, 'Completed')
+        props.changeTodoListFilter(props.todoListID, 'Completed')
     }
 
     /*const filteredTaskButton = (filter: FilterTaskType) => {
