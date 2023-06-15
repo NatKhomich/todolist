@@ -3,6 +3,7 @@ import {TodoListPropsType} from '../App';
 import {addTodoListAC, removeTodoListAC, todoListsReducer} from './todoListsReducer';
 
 test('correct todoList should be removed', ()=> {
+    //входные данные
     let todoListID1 = v1()
     let todoListID2 = v1()
 
@@ -10,10 +11,10 @@ test('correct todoList should be removed', ()=> {
         {id: todoListID1, title: 'What to learn', filter: 'All'},
         {id: todoListID2, title: 'What to buy', filter: 'All'},
     ]
-
+    //изменения
    /* const endState = todoListsReducer(startState, {type: 'REMOVE-TODOLIST'})*/
     const endState = todoListsReducer(startState, removeTodoListAC(todoListID1))
-
+    //ожидается
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(todoListID2)
 
@@ -24,7 +25,6 @@ test('correct todolist should be added', () => {
     let todolistId2 = v1()
 
     let newTodolistTitle = 'New Todolist'
-    const newTodoListID = v1()
 
     const startState: TodoListPropsType[] = [
         {id: todolistId1, title: 'What to learn', filter: 'All'},
@@ -33,7 +33,7 @@ test('correct todolist should be added', () => {
 
     /*const endState = todoListsReducer(startState, {type: 'ADD-TODOLIST', title: newTodolistTitle})*/
 
-    const endState = todoListsReducer(startState, addTodoListAC(newTodolistTitle, newTodoListID))
+    const endState = todoListsReducer(startState, addTodoListAC(newTodolistTitle))
 
     expect(endState.length).toBe(3)
     expect(endState[0].title).toBe(newTodolistTitle)
