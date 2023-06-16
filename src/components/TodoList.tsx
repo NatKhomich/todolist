@@ -1,8 +1,9 @@
-import React, {ChangeEvent, FC} from 'react';
+import React from 'react';
 import {FilterTaskType, TaskPropsType} from '../App';
 import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
 import styled from 'styled-components';
+import {CheckBox} from './CheckBox';
 
 export type TodoListType = {
     todoListID: string
@@ -20,25 +21,26 @@ export type TodoListType = {
     changeTodoListTitle: (todoListID: string, changeTitle: string)=> void
 }
 
-export const TodoList: FC<TodoListType> = (props) => {
+export const TodoList: React.FC<TodoListType> = (props) => {
 
     const MappedTask = props.tasks.map(el => {
         return (
             <li key={el.id} className={el.isDone ? 'opacityTask' : ''}>
-                <input type="checkbox"
+                {/*<input type="checkbox"
                        checked={el.isDone}
                        onChange={(e) => onChangeTaskStatusHandler(el.id, e)}
-                />
+                />*/}
+                <CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>
 
                 <EditableSpan title={el.title} onChange={(changeTitle)=> props.changeTaskTitle(props.todoListID, el.id, changeTitle)} />
 
-                <ButtonDelete onClick={() => props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
+                <ButtonDelete onClick={()=> props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
             </li>
         )
     })
 
-    const onChangeTaskStatusHandler = (taskID: string, e: ChangeEvent<HTMLInputElement>) => {
-        props.onChangeTaskStatus(props.todoListID, taskID, e.currentTarget.checked)
+    const onChangeTaskStatusHandler = (taskID: string, newChecked: boolean) => {
+        props.onChangeTaskStatus(props.todoListID, taskID, newChecked)
     }
 
     const removeTodoListHandler = () => {
