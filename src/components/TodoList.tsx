@@ -26,11 +26,11 @@ export const TodoList: React.FC<TodoListType> = (props) => {
     const MappedTask = props.tasks.map(el => {
         return (
             <li key={el.id} className={el.isDone ? 'opacityTask' : ''}>
-                {/*<input type="checkbox"
+                <input type="checkbox"
                        checked={el.isDone}
-                       onChange={(e) => onChangeTaskStatusHandler(el.id, e)}
-                />*/}
-                <CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>
+                       onChange={(e) => onChangeTaskStatusHandler(el.id, e.currentTarget.checked)}
+                />
+                {/*<CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>*/}
 
                 <EditableSpan title={el.title} onChange={(changeTitle)=> props.changeTaskTitle(props.todoListID, el.id, changeTitle)} />
 
