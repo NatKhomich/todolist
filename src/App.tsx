@@ -126,11 +126,9 @@ function App() {
     return (
 
         <div className="App">
-
             <AddItemForm addNewItem={addTodoList}/>
 
             {todoListsComponents}
-
         </div>
     );
 }

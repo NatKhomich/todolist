@@ -31,7 +31,6 @@ export const TodoList: React.FC<TodoListType> = (props) => {
                        onChange={(e) => onChangeTaskStatusHandler(el.id, e.currentTarget.checked)}
                 />
                 {/*<CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>*/}
-
                 <EditableSpan title={el.title} onChange={(changeTitle)=> props.changeTaskTitle(props.todoListID, el.id, changeTitle)} />
 
                 <ButtonDelete onClick={()=> props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
@@ -84,7 +83,6 @@ export const TodoList: React.FC<TodoListType> = (props) => {
                {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
                 <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} />*/}
-
             </div>
         </div>
     )
