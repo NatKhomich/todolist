@@ -5,16 +5,16 @@ import {v1} from 'uuid';
 import AddItemForm from './components/AddItemForm';
 
 export type TasksStateType = {
-    [key: string]: TaskPropsType[]
+    [key: string]: TasksType[]
 }
 
-export type TaskPropsType = {
+export type TasksType = {
     id: string,
     title: string,
     isDone: boolean
 }
 
-export type TodoListPropsType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterTaskType
@@ -27,7 +27,7 @@ function App() {
     let todoListID1 = v1()
     let todoListID2 = v1()
 
-    let [todoList, setTodoList] = useState<TodoListPropsType[]>([
+    let [todoList, setTodoList] = useState<TodoListType[]>([
         {id: todoListID1, title: 'What to learn', filter: 'All'},
         {id: todoListID2, title: 'What to buy', filter: 'All'},
     ])
@@ -43,6 +43,7 @@ function App() {
             {id: v1(), title: 'GraphQL', isDone: false},
         ]
     })
+
     //tasks
     const removeTask = (todoListID: string, taskID: string) => {
         setTasks({...tasks, [todoListID]: tasks[todoListID].filter(el => el.id !== taskID)})
@@ -71,7 +72,7 @@ function App() {
     }
     const addTodoList = (newTitle: string) => {
         const newTodoListID = v1()
-        const newTodoList: TodoListPropsType = {id: newTodoListID, title: newTitle, filter: 'All'}
+        const newTodoList: TodoListType = {id: newTodoListID, title: newTitle, filter: 'All'}
         setTodoList([newTodoList, ...todoList])
         setTasks({...tasks, [newTodoListID]: []})
     }
@@ -82,7 +83,7 @@ function App() {
         setTodoList(todoList.map(el => el.id === todoListID ? {...el, title: changeTitle} : el))
     }
 
-    const getFilteredTasksForRender = (todoLists: TaskPropsType[], filterValue: FilterTaskType) => {
+    const getFilteredTasksForRender = (todoLists: TasksType[], filterValue: FilterTaskType) => {
         if(filterValue === 'Active') {
             return todoLists.filter(el => !el.isDone)
         }
@@ -102,7 +103,7 @@ function App() {
             if (el.filter === 'Completed') {
                 filteredTasks = tasks[el.id].filter(el => el.isDone)
             }*/
-            const tasksForRender: TaskPropsType[] = getFilteredTasksForRender(tasks[el.id], el.filter)
+            const tasksForRender: TasksType[] = getFilteredTasksForRender(tasks[el.id], el.filter)
 
             return (
                 <TodoList key={el.id}

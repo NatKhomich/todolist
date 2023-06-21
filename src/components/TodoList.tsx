@@ -1,14 +1,13 @@
 import React from 'react';
-import {FilterTaskType, TaskPropsType} from '../App';
+import {FilterTaskType, TasksType} from '../App';
 import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
 import styled from 'styled-components';
-import {CheckBox} from './CheckBox';
 
 export type TodoListType = {
     todoListID: string
     title: string
-    tasks: TaskPropsType[]
+    tasks: TasksType[]
     filter: FilterTaskType
 
     removeTask: (todoListID: string, taskID: string) => void

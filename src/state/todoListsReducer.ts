@@ -1,14 +1,14 @@
-import {FilterTaskType, TodoListPropsType} from '../App';
+import {FilterTaskType, TodoListType} from '../App';
 import {v1} from 'uuid';
 
-export const todoListsReducer = (state: TodoListPropsType[], action: TodoListsReducerType): TodoListPropsType[] => {
+export const todoListsReducer = (state: TodoListType[], action: TodoListsReducerType): TodoListType[] => {
     switch (action.type) {
         case 'REMOVE-TODOLIST' :
             return state.filter(el => el.id !== action.payload.id)
 
         case 'ADD-TODOLIST' :
             const newTodoListID = v1()
-            const newTodoList: TodoListPropsType = {id: newTodoListID, title: action.payload.title, filter: 'All'}
+            const newTodoList: TodoListType = {id: newTodoListID, title: action.payload.title, filter: 'All'}
             return [newTodoList, ...state]
 
         case 'CHANGE-TODOLIST-TITLE' :
