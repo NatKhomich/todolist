@@ -13,11 +13,11 @@ export type TodoListType = {
     removeTask: (todoListID: string, taskID: string) => void
     addTask: (todoListID: string, newTitle: string) => void
     onChangeTaskStatus: (todoListID: string, taskID: string, newIsDone: boolean) => void
-    changeTaskTitle: (todoListID: string, taskID: string, changeTitle: string)=> void
+    changeTaskTitle: (todoListID: string, taskID: string, changeTitle: string) => void
 
     removeTodoList: (todoListID: string) => void
     changeTodoListFilter: (todoListID: string, filter: FilterTaskType) => void
-    changeTodoListTitle: (todoListID: string, changeTitle: string)=> void
+    changeTodoListTitle: (todoListID: string, changeTitle: string) => void
 }
 
 export const TodoList: React.FC<TodoListType> = (props) => {
@@ -30,9 +30,10 @@ export const TodoList: React.FC<TodoListType> = (props) => {
                        onChange={(e) => onChangeTaskStatusHandler(el.id, e.currentTarget.checked)}
                 />
                 {/*<CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>*/}
-                <EditableSpan title={el.title} onChange={(changeTitle)=> props.changeTaskTitle(props.todoListID, el.id, changeTitle)} />
+                <EditableSpan title={el.title}
+                              onChange={(changeTitle) => props.changeTaskTitle(props.todoListID, el.id, changeTitle)}/>
 
-                <ButtonDelete onClick={()=> props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
+                <ButtonDelete onClick={() => props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
             </li>
         )
     })
@@ -62,24 +63,25 @@ export const TodoList: React.FC<TodoListType> = (props) => {
     return (
         <div>
             <h3>
-                <EditableSpan title={props.title} onChange={ (changeTitle)=> props.changeTodoListTitle(props.todoListID, changeTitle) } />
-            <ButtonDelete onClick={ removeTodoListHandler }> X </ButtonDelete>
+                <EditableSpan title={props.title}
+                              onChange={(changeTitle) => props.changeTodoListTitle(props.todoListID, changeTitle)}/>
+                <ButtonDelete onClick={removeTodoListHandler}> X </ButtonDelete>
             </h3>
 
-            <AddItemForm addNewItem={(newTitle)=> props.addTask(props.todoListID, newTitle)}/>
+            <AddItemForm addNewItem={(newTitle) => props.addTask(props.todoListID, newTitle)}/>
 
             <ul>
                 {MappedTask}
             </ul>
             <div>
-                <ButtonFilter color={props.filter==='All' ? 'aqua' : 'gray'}
-                        onClick={allFilterTasksHandler}>All</ButtonFilter>
-                <ButtonFilter color={props.filter==='Active' ? 'aqua' : 'gray'}
-                        onClick={activeFilterTasksHandler}>Active</ButtonFilter>
-                <ButtonFilter color={props.filter==='Completed' ? 'aqua' : 'gray'}
-                        onClick={completedFilterTasksHandler}>Completed</ButtonFilter>
+                <ButtonFilter color={props.filter === 'All' ? 'aqua' : 'gray'}
+                              onClick={allFilterTasksHandler}>All</ButtonFilter>
+                <ButtonFilter color={props.filter === 'Active' ? 'aqua' : 'gray'}
+                              onClick={activeFilterTasksHandler}>Active</ButtonFilter>
+                <ButtonFilter color={props.filter === 'Completed' ? 'aqua' : 'gray'}
+                              onClick={completedFilterTasksHandler}>Completed</ButtonFilter>
 
-               {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
+                {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
                 <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} />*/}
             </div>
@@ -90,11 +92,11 @@ export const TodoList: React.FC<TodoListType> = (props) => {
 const ButtonFilter = styled.button`
   border-radius: 3px;
   background-color: ${props => {
-      if(props.color === 'aqua'){
-          return 'aqua'
-      } else {
-          return 'gray'
-      }
+    if (props.color === 'aqua') {
+      return 'aqua'
+    } else {
+      return 'gray'
+    }
   }
   };
   color: black;
