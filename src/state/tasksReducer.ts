@@ -59,8 +59,8 @@ export const RemoveTaskAC = (todoListID: string, taskID: string) => {
     return {
         type: 'REMOVE-TASK',
         payload: {
-            taskID,
-            todoListID
+            todoListID,
+            taskID
         }
     } as const
 }
@@ -70,8 +70,8 @@ export const AddTaskAC = (todoListID: string, newTitle: string) => {
     return {
         type: 'ADD-TASK',
         payload: {
-            newTitle,
-            todoListID
+            todoListID,
+            newTitle
         }
     } as const
 }

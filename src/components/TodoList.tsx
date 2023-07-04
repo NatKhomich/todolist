@@ -12,8 +12,8 @@ export type TodoListType = {
 
     removeTask: (todoListID: string, taskID: string) => void
     addTask: (todoListID: string, newTitle: string) => void
-    onChangeTaskStatus: (todoListID: string, taskID: string, newIsDone: boolean) => void
-    changeTaskTitle: (todoListID: string, taskID: string, changeTitle: string) => void
+    changeTaskStatus: (todoListID: string, taskID: string, newIsDone: boolean) => void
+    changeTaskTitle: (todoListID: string, taskID: string, newTitle: string) => void
 
     removeTodoList: (todoListID: string) => void
     changeTodoListFilter: (todoListID: string, filter: FilterTaskType) => void
@@ -39,7 +39,7 @@ export const TodoList: React.FC<TodoListType> = (props) => {
     })
 
     const onChangeTaskStatusHandler = (taskID: string, newChecked: boolean) => {
-        props.onChangeTaskStatus(props.todoListID, taskID, newChecked)
+        props.changeTaskStatus(props.todoListID, taskID, newChecked)
     }
 
     const removeTodoListHandler = () => {
