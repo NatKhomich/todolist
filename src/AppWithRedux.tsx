@@ -30,7 +30,7 @@ export type TodoListType = {
 
 export type FilterTaskType = 'All' | 'Active' | 'Completed'
 
-function AppWithReducers() {
+function AppWithRedux() {
 
     let todoListID1 = v1()
     let todoListID2 = v1()
@@ -134,4 +134,4 @@ function AppWithReducers() {
     );
 }
 
-export default AppWithReducers;
+export default AppWithRedux;
