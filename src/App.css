@@ -1,6 +1,9 @@
 .App {
   padding: 30px;
+
   display: flex;
+  flex-wrap: wrap;
+
 }
 
 .App > div {
@@ -23,3 +26,13 @@
   background-color: aqua;
 }
 
+.todo {
+  min-width: 250px;
+  border: 1px solid;
+  margin: 30px;
+  padding: 10px;
+}
+
+.item {
+  width: 100%;
+}
