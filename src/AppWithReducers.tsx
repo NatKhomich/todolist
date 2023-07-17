@@ -2,7 +2,7 @@ import React, {useReducer} from 'react';
 import './App.css';
 import {TodoList} from './components/TodoList';
 import {v1} from 'uuid';
-import AddItemForm from './components/AddItemForm';
+import {AddItemForm} from './components/AddItemForm';
 import {
     AddTodoListAC,
     ChangeTodoListFilterAC,

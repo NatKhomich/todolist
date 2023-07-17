@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {FilterTaskType, TasksType} from '../App';
-import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
 import styled from 'styled-components';
+import {AddItemForm} from './AddItemForm';
 
 export type TodoListType = {
     todoListID: string
@@ -60,6 +60,10 @@ export const TodoList: React.FC<TodoListType> = (props) => {
             props.filterTasks(props.todoListID, filter)
     }*/ // общая функция для трех кнопок фильтрации
 
+    const addTaskHandler = useCallback ((newTitle: string) => {
+        props.addTask(props.todoListID, newTitle)
+    }, [props.addTask, props.todoListID] )
+
     return (
         <div>
             <h3>
@@ -68,7 +72,7 @@ export const TodoList: React.FC<TodoListType> = (props) => {
                 <ButtonDelete onClick={removeTodoListHandler}> X </ButtonDelete>
             </h3>
 
-            <AddItemForm addNewItem={(newTitle) => props.addTask(props.todoListID, newTitle)}/>
+            <AddItemForm addNewItem={addTaskHandler}/>
 
             <ul>
                 {MappedTask}

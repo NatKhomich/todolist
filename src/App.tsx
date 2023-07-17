@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from './components/TodoList';
 import {v1} from 'uuid';
-import AddItemForm from './components/AddItemForm';
+import {AddItemForm} from './components/AddItemForm';
 
 export type TasksStateType = {
     [key: string]: TasksType[]
@@ -84,10 +84,10 @@ function App() {
     }
 
     const getFilteredTasksForRender = (todoLists: TasksType[], filterValue: FilterTaskType) => {
-        if(filterValue === 'Active') {
+        if (filterValue === 'Active') {
             return todoLists.filter(el => !el.isDone)
         }
-        if(filterValue === 'Completed') {
+        if (filterValue === 'Completed') {
             return todoLists.filter(el => el.isDone)
         } else {
             return todoLists
@@ -96,33 +96,33 @@ function App() {
 
     const todoListsComponents = todoList.map(el => {
 
-            /*let filteredTasks = tasks[el.id]
-            if (el.filter === 'Active') {
-                filteredTasks = tasks[el.id].filter(el => !el.isDone)
-            }
-            if (el.filter === 'Completed') {
-                filteredTasks = tasks[el.id].filter(el => el.isDone)
-            }*/
-            const tasksForRender: TasksType[] = getFilteredTasksForRender(tasks[el.id], el.filter)
+        /*let filteredTasks = tasks[el.id]
+        if (el.filter === 'Active') {
+            filteredTasks = tasks[el.id].filter(el => !el.isDone)
+        }
+        if (el.filter === 'Completed') {
+            filteredTasks = tasks[el.id].filter(el => el.isDone)
+        }*/
+        const tasksForRender: TasksType[] = getFilteredTasksForRender(tasks[el.id], el.filter)
 
-            return (
-                <TodoList key={el.id}
-                          todoListID={el.id}
-                          title={el.title}
-                          tasks={tasksForRender}
-                          filter={el.filter}
+        return (
+            <TodoList key={el.id}
+                      todoListID={el.id}
+                      title={el.title}
+                      tasks={tasksForRender}
+                      filter={el.filter}
 
-                          removeTask={removeTask}
-                          addTask={addTask}
-                          changeTaskStatus={changeTaskStatus}
-                          changeTaskTitle={changeTaskTitle}
+                      removeTask={removeTask}
+                      addTask={addTask}
+                      changeTaskStatus={changeTaskStatus}
+                      changeTaskTitle={changeTaskTitle}
 
-                          removeTodoList={removeTodoList}
-                          changeTodoListFilter={changeTodoListFilter}
-                          changeTodoListTitle={changeTodoListTitle}
-                />
-            )
-        })
+                      removeTodoList={removeTodoList}
+                      changeTodoListFilter={changeTodoListFilter}
+                      changeTodoListTitle={changeTodoListTitle}
+            />
+        )
+    })
 
     return (
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {FilterTaskType, TasksType} from '../App';
-import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../state/store';
 import {AddTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from '../state/tasksReducer';
 import {ChangeTodoListFilterAC, ChangeTodoListTitleAC, RemoveTodoListAC} from '../state/todoListsReducer';
+import {AddItemForm} from './AddItemForm';
 
 export type TodoListType = {
     id: string
