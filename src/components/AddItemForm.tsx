@@ -7,7 +7,6 @@ type AddItemFormType = {
 //первый способ - обернуть компоненту в memo и каждый callback в useCallback
 
 export const AddItemForm = memo ((props: AddItemFormType) => {
-    console.log('AddItemForm')
 
     const [newTitle, setNewTitle] = useState('')
     const [error, setError] = useState<string | null>(null)

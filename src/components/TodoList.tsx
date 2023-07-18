@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import {FilterTaskType, TasksType} from '../App';
 import EditableSpan from './EditableSpan';
 import styled from 'styled-components';
@@ -20,9 +20,18 @@ export type TodoListType = {
     changeTodoListTitle: (todoListID: string, changeTitle: string) => void
 }
 
-export const TodoList: React.FC<TodoListType> = (props) => {
+export const TodoList: React.FC<TodoListType> = memo((props) => {
+    console.log('TodoList')
 
-    const MappedTask = props.tasks.map(el => {
+    let tasks = props.tasks
+    if (props.filter === 'Active') {
+        tasks = tasks.filter(el => !el.isDone)
+    }
+    if (props.filter === 'Completed') {
+        tasks = tasks.filter(el => el.isDone)
+    }
+
+    const MappedTask = tasks.map(el => {
         return (
             <li key={el.id} className={el.isDone ? 'opacityTask' : ''}>
                 <input type="checkbox"
@@ -60,9 +69,9 @@ export const TodoList: React.FC<TodoListType> = (props) => {
             props.filterTasks(props.todoListID, filter)
     }*/ // общая функция для трех кнопок фильтрации
 
-    const addTaskHandler = useCallback ((newTitle: string) => {
+    const addTaskHandler = useCallback((newTitle: string) => {
         props.addTask(props.todoListID, newTitle)
-    }, [props.addTask, props.todoListID] )
+    }, [props.addTask, props.todoListID])
 
     return (
         <div>
@@ -91,7 +100,20 @@ export const TodoList: React.FC<TodoListType> = (props) => {
             </div>
         </div>
     )
-}
+})
+
+
+/*
+export const TodoList: React.FC<TodoListType> = memo((props) => {
+    return( <div>  </div> )
+    },
+    (prevProps, nextProps) => {
+        if (prevProps.tasks !== nextProps.tasks) return false
+        if (prevProps.filter !== nextProps.filter) return false
+        return true
+    })
+*/
+
 
 const ButtonFilter = styled.button`
   border-radius: 3px;
