@@ -73,11 +73,15 @@ export const TodoList: React.FC<TodoListType> = memo((props) => {
         props.addTask(props.todoListID, newTitle)
     }, [props.addTask, props.todoListID])
 
+    const editModeOnChangeHandler = useCallback((changeTitle: string) => {
+        props.changeTodoListTitle(props.todoListID, changeTitle)
+    }, [props.changeTodoListTitle, props.todoListID])
+
     return (
         <div>
             <h3>
                 <EditableSpan title={props.title}
-                              onChange={(changeTitle) => props.changeTodoListTitle(props.todoListID, changeTitle)}/>
+                              onChange={editModeOnChangeHandler}/>
                 <ButtonDelete onClick={removeTodoListHandler}> X </ButtonDelete>
             </h3>
 

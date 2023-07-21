@@ -71,10 +71,7 @@ function AppWithRedux() {
     },[dispatch])
 
 
-
     const todoListsComponents = todoLists.map(el => {
-
-       // const tasksForRender: TasksType[] = getFilteredTasksForRender(tasks[el.id], el.filter)
 
         return (
             <div className={'todo'}  key={el.id}>
