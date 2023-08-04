@@ -60,8 +60,7 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
     }
 
     const removeTodoListHandler = () => {
-        let action = RemoveTodoListAC(props.id)
-        dispatch(action)
+        dispatch(RemoveTodoListAC(props.id))
     }
 
     /* const allFilterTasksHandler = () => {
@@ -74,14 +73,15 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
          props.changeTodoListFilter(props.todoListID, 'Completed')
      }*/
 
-    const filteredTaskButton = (filter: FilterTaskType) => {
+    const changeTodoListTitleHandler = (changeTitle: string) => {
+        dispatch(ChangeTodoListTitleAC(props.id, changeTitle))
+    }
+
+    const filteredTaskButton = (filter: FilterTaskType) => () => {
         dispatch(ChangeTodoListFilterAC(props.id, filter))
     } // общая функция для трех кнопок фильтрации
 
 
-    const changeTodoListTitleHandler = (changeTitle: string) => {
-        dispatch(ChangeTodoListTitleAC(props.id, changeTitle))
-    }
 
     return (
         <div>
@@ -105,11 +105,11 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
                               onClick={completedFilterTasksHandler}>Completed</ButtonFilter>*/}
 
                 <ButtonFilter color={props.filter === 'All' ? 'aqua' : 'gray'}
-                              onClick={() => filteredTaskButton('All')}>All</ButtonFilter>
+                              onClick={filteredTaskButton('All')}>All</ButtonFilter>
                 <ButtonFilter color={props.filter === 'Active' ? 'aqua' : 'gray'}
-                              onClick={() => filteredTaskButton('Active')}>Active</ButtonFilter>
+                              onClick={filteredTaskButton('Active')}>Active</ButtonFilter>
                 <ButtonFilter color={props.filter === 'Completed' ? 'aqua' : 'gray'}
-                              onClick={() => filteredTaskButton('Completed')}>Completed</ButtonFilter>
+                              onClick={filteredTaskButton('Completed')}>Completed</ButtonFilter>
 
                 {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
