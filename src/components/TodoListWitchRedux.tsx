@@ -31,12 +31,12 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
                 <EditableSpan title={el.title}
                               onChange={(changeTitle) => changeTaskTitleHandler(el.id, changeTitle) }/>
 
-                <ButtonDelete onClick={() => removeTaskHandler(el.id)}> X </ButtonDelete>
+                <ButtonDelete onClick={removeTaskHandler(el.id)}> X </ButtonDelete>
             </li>
         )
     })
 
-    const removeTaskHandler = (taskID: string) => {
+    const removeTaskHandler = (taskID: string) => () => {
         dispatch(RemoveTaskAC(props.id, taskID))
     }
 
@@ -97,12 +97,6 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
                 {MappedTask}
             </ul>
             <div>
-                {/*<ButtonFilter color={props.filter === 'All' ? 'aqua' : 'gray'}
-                              onClick={allFilterTasksHandler}>All</ButtonFilter>
-                <ButtonFilter color={props.filter === 'Active' ? 'aqua' : 'gray'}
-                              onClick={activeFilterTasksHandler}>Active</ButtonFilter>
-                <ButtonFilter color={props.filter === 'Completed' ? 'aqua' : 'gray'}
-                              onClick={completedFilterTasksHandler}>Completed</ButtonFilter>*/}
 
                 <ButtonFilter color={props.filter === 'All' ? 'aqua' : 'gray'}
                               onClick={filteredTaskButton('All')}>All</ButtonFilter>
@@ -114,6 +108,13 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
                 {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
                 <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
                 <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} />*/}
+
+                {/*<ButtonFilter color={props.filter === 'All' ? 'aqua' : 'gray'}
+                              onClick={allFilterTasksHandler}>All</ButtonFilter>
+                <ButtonFilter color={props.filter === 'Active' ? 'aqua' : 'gray'}
+                              onClick={activeFilterTasksHandler}>Active</ButtonFilter>
+                <ButtonFilter color={props.filter === 'Completed' ? 'aqua' : 'gray'}
+                              onClick={completedFilterTasksHandler}>Completed</ButtonFilter>*/}
             </div>
         </div>
     )
