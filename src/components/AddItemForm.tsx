@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 
-type AddItemFormType = {
+export type AddItemFormType = {
     addNewItem: (newTitle: string)=> void
 }
 
