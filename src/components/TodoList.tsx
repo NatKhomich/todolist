@@ -3,6 +3,7 @@ import {FilterTaskType, TasksType} from '../App';
 import EditableSpan from './EditableSpan';
 import styled from 'styled-components';
 import {AddItemForm} from './AddItemForm';
+import {Task} from './Task';
 
 export type TodoListType = {
     todoListID: string
@@ -33,17 +34,23 @@ export const TodoList: React.FC<TodoListType> = memo((props) => {
 
     const MappedTask = tasks.map(el => {
         return (
-            <li key={el.id} className={el.isDone ? 'opacityTask' : ''}>
+            /*<li key={el.id} className={el.isDone ? 'opacityTask' : ''}>
                 <input type="checkbox"
                        checked={el.isDone}
                        onChange={(e) => onChangeTaskStatusHandler(el.id, e.currentTarget.checked)}
                 />
-                {/*<CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>*/}
+                {/!*<CheckBox checked={el.isDone} callBack={(newChecked)=> onChangeTaskStatusHandler(el.id, newChecked)}/>*!/}
                 <EditableSpan title={el.title}
                               onChange={(changeTitle) => props.changeTaskTitle(props.todoListID, el.id, changeTitle)}/>
 
                 <ButtonDelete onClick={() => props.removeTask(props.todoListID, el.id)}> X</ButtonDelete>
-            </li>
+            </li>*/
+            <Task task={el}
+                  todoListID={props.todoListID}
+                  changeTaskStatus={props.changeTaskStatus}
+                  removeTask={props.removeTask}
+                  changeTaskTitle={props.changeTaskTitle}
+            />
         )
     })
 
@@ -137,7 +144,7 @@ const ButtonFilter = styled.button`
   min-width: 50px;
 `
 
-const ButtonDelete = styled.button`
+export const ButtonDelete = styled.button`
   border-radius: 3px;
   background-color: gray;
   color: black;
