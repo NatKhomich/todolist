@@ -22,7 +22,6 @@ export type TodoListType = {
 }
 
 export const TodoList: React.FC<TodoListType> = memo((props) => {
-    console.log('TodoList')
 
     let tasks = props.tasks
     if (props.filter === 'Active') {
@@ -54,10 +53,6 @@ export const TodoList: React.FC<TodoListType> = memo((props) => {
         )
     })
 
-    const onChangeTaskStatusHandler = (taskID: string, newChecked: boolean) => {
-        props.changeTaskStatus(props.todoListID, taskID, newChecked)
-    }
-
     const removeTodoListHandler = () => {
         props.removeTodoList(props.todoListID)
     }
@@ -80,7 +75,7 @@ export const TodoList: React.FC<TodoListType> = memo((props) => {
         props.addTask(props.todoListID, newTitle)
     }, [props.addTask, props.todoListID])
 
-    const editModeOnChangeHandler = useCallback((changeTitle: string) => {
+    const changeTodoListTitleHandler = useCallback((changeTitle: string) => {
         props.changeTodoListTitle(props.todoListID, changeTitle)
     }, [props.changeTodoListTitle, props.todoListID])
 
@@ -88,7 +83,7 @@ export const TodoList: React.FC<TodoListType> = memo((props) => {
         <div>
             <h3>
                 <EditableSpan title={props.title}
-                              onChange={editModeOnChangeHandler}/>
+                              onChange={changeTodoListTitleHandler}/>
                 <ButtonDelete onClick={removeTodoListHandler}> X </ButtonDelete>
             </h3>
 

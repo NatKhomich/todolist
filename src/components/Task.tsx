@@ -4,7 +4,7 @@ import {ButtonDelete} from './TodoList';
 import {TasksType} from '../App';
 
 
-type TaskPropsType = {
+export type TaskPropsType = {
     todoListID: string
     task: TasksType
     changeTaskStatus: (todoListID: string, taskID: string, newChecked: boolean) => void
