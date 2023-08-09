@@ -1,6 +1,6 @@
 import React, {ChangeEvent, memo, useState} from 'react';
 
-type EditableSpanType = {
+export type EditableSpanType = {
     title: string
     onChange: (changeTitle: string)=> void
 }
