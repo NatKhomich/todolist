@@ -5,11 +5,12 @@ import AppWithRedux from './AppWithRedux';
 import {Provider} from 'react-redux';
 import {store} from './state/store';
 import App from './App';
+import AppWithCustomHooks from './hooksApp/AppWithCustomHooks';
 
 
 const container = document.getElementById('root') as HTMLElement
 const root = createRoot(container)
-root.render(<Provider store={store}><AppWithRedux /> </Provider>);
+root.render(<Provider store={store}><AppWithCustomHooks /> </Provider>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
