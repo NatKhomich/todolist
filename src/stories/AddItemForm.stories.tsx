@@ -27,7 +27,7 @@ export default meta;
 type Story = StoryObj<typeof AddItemForm>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary: Story = {
+export const AddItemFormStory: Story = {
     args: {
         addNewItem: action('Button clicked inside form')
     },
@@ -35,7 +35,7 @@ export const Primary: Story = {
 
 
 
-export const AddItemFormError: FC<AddItemFormType> = (args) => {
+const AddItemFormError: FC<AddItemFormType> = (args) => {
 
         const [newTitle, setNewTitle] = useState('')
         const [error, setError] = useState<string | null>('Title is required')

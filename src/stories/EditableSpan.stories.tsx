@@ -1,9 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {action} from '@storybook/addon-actions'
 import EditableSpan, {EditableSpanType} from '../components/EditableSpan';
-import exp from 'constants';
 import React, {ChangeEvent, FC, useState} from 'react';
-import {AddItemFormError} from './AddItemForm.stories';
 
 
 // More on how to set up stories at:
@@ -40,7 +38,7 @@ export const EditableSpanStory: Story = {
 };
 
 
-export const EditableSpanFromInput: FC<EditableSpanType> = (args) => {
+const EditableSpanFromInput: FC<EditableSpanType> = (args) => {
     const [changeTitle, setChangeTitle] = useState(args.title)
 
     const activateEditMode = () => {
