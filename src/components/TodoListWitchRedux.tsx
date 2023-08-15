@@ -104,17 +104,6 @@ export const TodoListWitchRedux: React.FC<TodoListType> = (props) => {
                               onClick={filteredTaskButton('Active')}>Active</ButtonFilter>
                 <ButtonFilter color={props.filter === 'Completed' ? 'aqua' : 'gray'}
                               onClick={filteredTaskButton('Completed')}>Completed</ButtonFilter>
-
-                {/*<Button name={'All'} callBack={()=> filteredTaskButton('All')} />
-                <Button name={'Active'} callBack={()=> filteredTaskButton('Active')} />
-                <Button name={'Completed'} callBack={()=> filteredTaskButton('Completed')} />*/}
-
-                {/*<ButtonFilter color={props.filter === 'All' ? 'aqua' : 'gray'}
-                              onClick={allFilterTasksHandler}>All</ButtonFilter>
-                <ButtonFilter color={props.filter === 'Active' ? 'aqua' : 'gray'}
-                              onClick={activeFilterTasksHandler}>Active</ButtonFilter>
-                <ButtonFilter color={props.filter === 'Completed' ? 'aqua' : 'gray'}
-                              onClick={completedFilterTasksHandler}>Completed</ButtonFilter>*/}
             </div>
         </div>
     )
