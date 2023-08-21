@@ -1,9 +1,7 @@
+/*
 .App {
   padding: 30px;
-
   display: flex;
-  flex-wrap: wrap;
-
 }
 
 .App > div {
@@ -11,28 +9,18 @@
 }
 
 .error {
-  border: 1px red solid;
+  border: red 1px solid;
 }
 
-.errorMessage {
+.error-message {
   color: red;
 }
 
-.opacityTask {
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
   opacity: 0.5;
 }
-
-.colorButton {
-  background-color: aqua;
-}
-
-.todo {
-  min-width: 250px;
-  border: 1px solid;
-  margin: 30px;
-  padding: 10px;
-}
-
-.item {
-  width: 100%;
-}
+*/
