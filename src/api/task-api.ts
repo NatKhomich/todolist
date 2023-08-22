@@ -1,28 +1,31 @@
 import axios from 'axios';
 
 //объект дефолтных настроек. и от него уже делаем запрос
-const instance = axios.create(
-    {
+const instance = axios.create({
         withCredentials: true,
         baseURL: 'https://social-network.samuraijs.com/api/1.1'
-    }
-)
+    })
 
 export const tasksAPI = {
     getTask(todolistID: string) {
         return instance.get(`/todo-lists/${todolistID}/tasks`)
     },
-    // createTask(title: string) {
-    //    return instance.post<ResponseType<{item: TodolistType}>>('/todo-lists', {title})
-    // },
-    // deleteTask(todoListID: string) {
-    //   return  instance.delete<ResponseType>(`/todo-lists/${todoListID}`)
-    // },
-    // updateTask(todoListID: string, newTitle: string) {
-    //    return instance.put<ResponseType>(`/todo-lists/${todoListID}`, newTitle)
-    // }
+    createTask(todolistID: string, title: string) {
+        return instance.post(`/todo-lists/${todolistID}/tasks`, {title})
+    },
+    deleteTask(todolistID: string, taskID: string) {
+        return instance.delete(`/todo-lists/${todolistID}/tasks/${taskID}`)
+    },
+    updateTask(todoListID: string, taskId: string, newTitle: string) {
+        return instance.put(`/todo-lists/${todoListID}/tasks/${taskId}`, newTitle)
+    }
 }
 
+type TaskType = {
+    error: null
+    items: []
+    totalCount: 0
+}
 
 // type TodolistType = {
 //     id: string
