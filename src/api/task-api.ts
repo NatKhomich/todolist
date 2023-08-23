@@ -2,42 +2,47 @@ import axios from 'axios';
 
 //объект дефолтных настроек. и от него уже делаем запрос
 const instance = axios.create({
-        withCredentials: true,
-        baseURL: 'https://social-network.samuraijs.com/api/1.1'
-    })
+    withCredentials: true,
+    baseURL: 'https://social-network.samuraijs.com/api/1.1'
+})
 
 export const tasksAPI = {
     getTask(todolistID: string) {
-        return instance.get(`/todo-lists/${todolistID}/tasks`)
+        return instance.get<GetTaskResponse>(`/todo-lists/${todolistID}/tasks`)
     },
     createTask(todolistID: string, title: string) {
-        return instance.post(`/todo-lists/${todolistID}/tasks`, {title})
+        return instance.post<ResponseType<{item: TaskType}>>(`/todo-lists/${todolistID}/tasks`, {title})
     },
     deleteTask(todolistID: string, taskID: string) {
-        return instance.delete(`/todo-lists/${todolistID}/tasks/${taskID}`)
+        return instance.delete<ResponseType>(`/todo-lists/${todolistID}/tasks/${taskID}`)
     },
-    updateTask(todoListID: string, taskId: string, newTitle: string) {
-        return instance.put(`/todo-lists/${todoListID}/tasks/${taskId}`, newTitle)
+    updateTask(todoListID: string, taskId: string, title: string) {
+        return instance.put<ResponseType>(`/todo-lists/${todoListID}/tasks/${taskId}`, {title})
     }
 }
 
-type TaskType = {
-    error: null
-    items: []
-    totalCount: 0
+export type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
 }
 
-// type TodolistType = {
-//     id: string
-//     title: string
-//     addedDate: Date
-//     order: number
-// }
-//
-// type ResponseType<T = {}> = {
-//     resultCode: number
-//     messages: string[]
-//     data: T
-//     // fieldsErrors: string[]
-// }
+type GetTaskResponse = {
+    error: null | string
+    totalCount: number
+    items: TaskType[]
+}
 
+type ResponseType<D = {}> = {
+    data: D
+    resultCode: number
+    messages: string[]
+}

@@ -18,8 +18,8 @@ export const todolistAPI = {
     deleteTodolist(todoListID: string) {
       return  instance.delete<ResponseType>(`/todo-lists/${todoListID}`)
     },
-    updateTodolist(todoListID: string, newTitle: string) {
-       return instance.put<ResponseType>(`/todo-lists/${todoListID}`, newTitle)
+    updateTodolist(todoListID: string, title: string) {
+       return instance.put<ResponseType>(`/todo-lists/${todoListID}`, {title})
     }
 }
 
@@ -30,10 +30,10 @@ type TodolistType = {
     order: number
 }
 
-type ResponseType<T = {}> = {
+type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
-    data: T
+    data: D
     // fieldsErrors: string[]
 }
 
