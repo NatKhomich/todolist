@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import {tasksAPI} from '../api/task-api';
 
 export default {
@@ -7,7 +7,13 @@ export default {
 
 export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
+    const [value, setValue] = useState<any>('')
+
+    const onChangeHAndler = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.value)
+    }
+
+    const onClickHandler = () => {
         const todolistID = '46a167f4-9d96-46d8-9094-b3308641041f'
         tasksAPI.getTask(todolistID)
             .then((res) => {
@@ -16,8 +22,16 @@ export const GetTasks = () => {
             .catch((err) => {
                 setState(err.message)
             })
-    }, [])
-    return <div>{JSON.stringify(state)}</div>
+    }
+
+    return (
+        <>
+            {state ? <div>{JSON.stringify(state)}</div> : ''}
+
+            <input value={value} onChange={onChangeHAndler} placeholder={'todolist ID'}/>
+            <button onClick={onClickHandler}> GET TASKS</button>
+        </>
+    )
 }
 
 export const CreateTasks = () => {
@@ -37,7 +51,7 @@ export const DeleteTasks = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const todolistID = '46a167f4-9d96-46d8-9094-b3308641041f'
-        const taskID = '91f362ff-5e9e-4ae8-87a9-eb1c52736a22'
+        const taskID = '5bbecfeb-0506-4237-9f25-8953e0ec7da0'
         tasksAPI.deleteTask(todolistID, taskID)
             .then((res) => {
                 setState(res.data)
