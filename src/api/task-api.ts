@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-//объект дефолтных настроек. и от него уже делаем запрос
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.1'

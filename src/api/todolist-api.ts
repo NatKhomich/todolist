@@ -36,22 +36,3 @@ type ResponseType<D = {}> = {
     data: D
     // fieldsErrors: string[]
 }
-
-/*type CreateTodolistResponseType<T> = {
-    resultCode: number
-    messages: string[],
-    data: T
-}
-
-type DeleteTodolistResponseType<T> = {
-    resultCode: number
-    messages: string[]
-        data: T
-}
-
-type UpdateTodolistResponseType<T> = {
-    data: T
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}*/
