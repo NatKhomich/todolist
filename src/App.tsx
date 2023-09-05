@@ -16,7 +16,7 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
-    getTodolistsThunk,
+    getTodolistsTC,
     removeTodolistAC,
     TodolistDomainType
 } from './state/todolists-reducer'
@@ -37,7 +37,7 @@ function App() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getTodolistsThunk)
+        dispatch(getTodolistsTC())
     }, [])
 
     const removeTask = useCallback(function (id: string, todolistId: string) {
