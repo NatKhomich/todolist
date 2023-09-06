@@ -98,18 +98,16 @@ export const setTodolistsAC = (todos: TodolistType[]) => {
 }*/
 
 //thunk create
-export const getTodolistsTC = () => {
-    return (dispatch: Dispatch) => {
-        todolistsAPI.getTodolists()
-            .then(res => {
-                dispatch(setTodolistsAC(res.data))
-            })
-    }
+export const getTodolistsTC = () => (dispatch: Dispatch) => {
+    todolistsAPI.getTodolists()
+        .then(res => {
+            dispatch(setTodolistsAC(res.data))
+        })
 }
 
 export const deleteTodolistTC = (todolistID: string) => (dispatch: Dispatch) => {
     todolistsAPI.deleteTodolist(todolistID)
-        .then((res) => {
+        .then(() => {
             dispatch(removeTodolistAC(todolistID))
         })
 }
@@ -119,4 +117,11 @@ export const createTodolistTC = (title: string) => (dispatch: Dispatch) => {
         .then((res) => {
             dispatch(addTodolistAC(res.data.data.item))
         })
+}
+
+export const updateTodolistTitleTC = (todolistID: string, title: string) => (dispatch: Dispatch) => {
+   todolistsAPI.updateTodolist(todolistID, title)
+       .then(() => {
+           dispatch(changeTodolistTitleAC(todolistID, title))
+       })
 }
