@@ -20,7 +20,7 @@ type PropsType = {
     removeTask: (taskId: string, todolistId: string) => void
     removeTodolist: (id: string) => void
     changeTodolistTitle: (id: string, newTitle: string) => void
- }
+}
 
 export const Todolist = React.memo(function (props: PropsType) {
 
@@ -54,7 +54,9 @@ export const Todolist = React.memo(function (props: PropsType) {
     }
 
     return <div>
-        <h3><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}/>
+        <h3><EditableSpan disabled={props.todolist.entityStatus === 'loading'}
+                          value={props.todolist.title}
+                          onChange={changeTodolistTitle}/>
             <IconButton disabled={props.todolist.entityStatus === 'loading'}
                         onClick={removeTodolist}>
                 <Delete/>
@@ -62,10 +64,13 @@ export const Todolist = React.memo(function (props: PropsType) {
         </h3>
         <AddItemForm disabled={props.todolist.entityStatus === 'loading'} addItem={addTask}/>
         <div>
-            {tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={props.todolist.id}
-                                                removeTask={props.removeTask}
-                                                changeTaskTitle={props.changeTaskTitle}
-                                                changeTaskStatus={props.changeTaskStatus}/>)}
+            {tasksForTodolist.map(t => <Task key={t.id}
+                                             disabled={props.todolist.entityStatus === 'loading'}
+                                             task={t}
+                                             todolistId={props.todolist.id}
+                                             removeTask={props.removeTask}
+                                             changeTaskTitle={props.changeTaskTitle}
+                                             changeTaskStatus={props.changeTaskStatus}/>)}
         </div>
         <div style={{paddingTop: '10px'}}>
             <Button variant={props.todolist.filter === 'all' ? 'outlined' : 'text'}
