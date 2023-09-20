@@ -37,6 +37,12 @@ export const todolistsAPI = {
 }
 
 // types
+export enum ResultCode {
+    succeed = 0,
+    error = 1,
+    captcha_error = 10
+}
+
 export type TodolistType = {
     id: string
     title: string
