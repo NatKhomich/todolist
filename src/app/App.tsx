@@ -30,13 +30,10 @@ function App() {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-
             {status === 'loading' && <LinearProgress color="secondary" />}
-
             <Container fixed>
                 <TodolistsList/>
             </Container>
-
             <ErrorSnackbar />
         </div>
     )
