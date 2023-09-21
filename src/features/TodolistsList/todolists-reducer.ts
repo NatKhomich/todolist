@@ -113,7 +113,9 @@ type ActionsType = | RemoveTodolistActionType | AddTodolistActionType
     | SetTodolistsActionType | SetStatusActionType
     | ChangeTodolistEntityStatusActionType
     | SetErrorActionType
+
 export type FilterValuesType = 'all' | 'active' | 'completed';
+
 export type TodolistDomainType = TodolistType & {
     filter: FilterValuesType
     entityStatus: RequestStatusType

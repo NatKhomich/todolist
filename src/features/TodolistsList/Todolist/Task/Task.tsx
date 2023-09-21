@@ -30,11 +30,12 @@ export const Task = React.memo((props: TaskPropsType) => {
             checked={props.task.status === TaskStatuses.Completed}
             color="primary"
             onChange={onChangeHandler}
+            disabled={props.disabled}
         />
 
         <EditableSpan disabled={props.disabled} value={props.task.title} onChange={onTitleChangeHandler}/>
-        <IconButton onClick={onClickHandler}>
-            <Delete/>
+        <IconButton onClick={onClickHandler} disabled={props.disabled}>
+            <Delete />
         </IconButton>
     </div>
 })

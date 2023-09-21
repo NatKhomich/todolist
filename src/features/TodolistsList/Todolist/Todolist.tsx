@@ -2,9 +2,9 @@ import React, {useCallback, useEffect} from 'react'
 import {AddItemForm} from '../../../components/AddItemForm/AddItemForm'
 import {EditableSpan} from '../../../components/EditableSpan/EditableSpan'
 import {Task} from './Task/Task'
-import {TaskStatuses, TaskType} from '../../../api/todolists-api'
+import {TaskStatuses} from '../../../api/todolists-api'
 import {FilterValuesType, TodolistDomainType} from '../todolists-reducer'
-import {fetchTasksTC} from '../tasks-reducer'
+import {fetchTasksTC, TasksDomainType} from '../tasks-reducer'
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import {Delete} from '@mui/icons-material';
@@ -12,7 +12,7 @@ import {useAppDispatch} from '../../../app/store';
 
 type PropsType = {
     todolist: TodolistDomainType
-    tasks: Array<TaskType>
+    tasks: Array<TasksDomainType>
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTask: (title: string, todolistId: string) => void
     changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
@@ -65,7 +65,7 @@ export const Todolist = React.memo(function (props: PropsType) {
         <AddItemForm disabled={props.todolist.entityStatus === 'loading'} addItem={addTask}/>
         <div>
             {tasksForTodolist.map(t => <Task key={t.id}
-                                             disabled={props.todolist.entityStatus === 'loading'}
+                                             disabled={t.entityStatus === 'loading'}
                                              task={t}
                                              todolistId={props.todolist.id}
                                              removeTask={props.removeTask}
