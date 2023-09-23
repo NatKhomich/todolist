@@ -97,7 +97,6 @@ export const changeTodolistTitleTC = (id: string, title: string) => {
             })
             .catch((e) => {
                 handleServerNetworkError(e.message, dispatch)
-
             })
     }
 }
