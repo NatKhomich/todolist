@@ -112,17 +112,6 @@ export const addTaskTC = (title: string, todolistId: string) => async (dispatch:
         const error = (e as Error).message
         handleServerNetworkError(error, dispatch)
     }
-
-       /* todolistsAPI.createTask(todolistId, title)
-       .then(res => {
-            if (res.data.resultCode === ResultCode.succeed) {
-                dispatch(addTaskAC(res.data.data.item))
-                dispatch(setStatusAC('succeeded'))
-            } else handleServerAppError<{ item: TaskType }>(res.data, dispatch)
-        })
-        .catch((e) => {
-            handleServerNetworkError(e.message, dispatch)
-        })*/
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
     (dispatch: Dispatch<ActionsType>, getState: () => AppRootStateType) => {
