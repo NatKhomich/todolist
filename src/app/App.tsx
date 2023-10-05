@@ -12,6 +12,9 @@ import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
 import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
+import {Login} from '../features/Login/Login';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import error404 from '../image/404.jpg'
 
 
 function App() {
@@ -32,7 +35,13 @@ function App() {
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistsList/>
+                <Routes>
+                    <Route path={'/'} element={<TodolistsList/>} />
+                    <Route path={'/login'} element={<Login/>} />
+
+                    <Route path={'/404'} element={<img className={'errorImg'} src={error404} alt="" />} />
+                    <Route path={'*'} element={<Navigate to={'/404'} />} />
+                </Routes>
             </Container>
         </div>
     )
