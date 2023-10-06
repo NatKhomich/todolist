@@ -8,13 +8,23 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
+import {loginTC} from './auth-reducer';
+import {useAppDispatch, useAppSelector} from '../../app/store';
+import {Navigate} from 'react-router-dom';
 
 type FormikErrorType = {
     email?: string
     password?: string
 }
+export type DataLoginType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
 
 export const Login = () => {
+    const dispatch = useAppDispatch()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
     const formik = useFormik({
         initialValues: {
@@ -25,7 +35,7 @@ export const Login = () => {
         validate: (values) => {
             const errors: FormikErrorType = {}
             const regExpEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-            const regExpPassword = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/
+            // const regExpPassword = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/
 
             if (!values.email) {
                 errors.email = 'Required'
@@ -34,18 +44,20 @@ export const Login = () => {
             }
             if (!values.password) {
                 errors.password = 'Required'
-            } else if (!regExpPassword.test(values.password)) {
+            } else if (values.password.length < 4) {
                 errors.password = 'Invalid password'
             }
             return errors
         },
         //пока есть ошибка в одном из полей submit не сработает
-        onSubmit: values => {
-            alert(JSON.stringify(values)) //будет отправка данных на бэк
+        onSubmit: (values) => {
+            dispatch(loginTC(values))  //будет отправка данных на бэк
             formik.resetForm()
         },
     })
-    console.log(formik.errors)
+   if (isLoggedIn) {
+       return <Navigate to={'/'} />
+   }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
