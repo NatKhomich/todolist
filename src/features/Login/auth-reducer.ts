@@ -2,6 +2,7 @@ import {Dispatch} from 'redux'
 import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from '../../app/app-reducer'
 import {authAPI} from '../../api/todolists-api';
 import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils';
+import {DataLoginType} from './Login';
 
 const initialState = {
     isLoggedIn: false
@@ -36,7 +37,7 @@ export const setIsLoggedInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-
 //         handleServerNetworkError(error as {message: string}, dispatch);
 //     }
 // }
-export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
+export const loginTC = (data: DataLoginType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
 
     authAPI.login(data)
@@ -52,6 +53,20 @@ export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
         .catch(error => {
             handleServerNetworkError(error as { message: string }, dispatch);
         })
+}
+export const meTC = () => async (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const result = await authAPI.me()
+        if (result.data.resultCode === 0) {
+            dispatch(setIsLoggedInAC(true))
+            dispatch(setAppStatusAC('succeeded'))
+        } else {
+            handleServerAppError(result.data, dispatch);
+        }
+    } catch (error) {
+        handleServerNetworkError(error as {message: string}, dispatch);
+    }
 }
 
 // types
