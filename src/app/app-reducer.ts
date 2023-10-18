@@ -1,16 +1,16 @@
 import { Dispatch } from "redux";
-import { authAPI } from "../api/todolists-api";
-import { setIsLoggedInAC } from "../features/Login/auth-reducer";
+import { authAPI } from "api/todolists-api";
+import { authActions } from "features/Login/auth-reducer";
 
 const initialState: InitialStateType = {
   status: "idle",
   error: null,
-  isInitialized: false,
+  isInitialized: false
 };
 
 export const appReducer = (
   state: InitialStateType = initialState,
-  action: ActionsType,
+  action: ActionsType
 ): InitialStateType => {
   switch (action.type) {
     case "APP/SET-STATUS":
@@ -44,7 +44,7 @@ export const setAppInitializedAC = (value: boolean) =>
 export const initializeAppTC = () => (dispatch: Dispatch) => {
   authAPI.me().then((res) => {
     if (res.data.resultCode === 0) {
-      dispatch(setIsLoggedInAC(true));
+      dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }));
     } else {
     }
     dispatch(setAppInitializedAC(true));
