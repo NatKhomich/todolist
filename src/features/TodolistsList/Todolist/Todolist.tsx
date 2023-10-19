@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { AddItemForm } from "../../../components/AddItemForm/AddItemForm";
-import { EditableSpan } from "../../../components/EditableSpan/EditableSpan";
+import { AddItemForm } from "components/AddItemForm/AddItemForm";
+import { EditableSpan } from "components/EditableSpan/EditableSpan";
 import { Task } from "./Task/Task";
-import { TaskStatuses, TaskType } from "../../../api/todolists-api";
+import { TaskStatuses, TaskType } from "api/todolists-api";
 import { FilterValuesType, TodolistDomainType } from "../todolists-reducer";
 import { fetchTasksTC } from "../tasks-reducer";
-import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAppDispatch } from "hooks/useAppDispatch";
 import { Button, IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
@@ -17,12 +17,12 @@ type PropsType = {
   changeTaskStatus: (
     id: string,
     status: TaskStatuses,
-    todolistId: string,
+    todolistId: string
   ) => void;
   changeTaskTitle: (
     taskId: string,
     newTitle: string,
-    todolistId: string,
+    todolistId: string
   ) => void;
   removeTask: (taskId: string, todolistId: string) => void;
   removeTodolist: (id: string) => void;
@@ -30,10 +30,10 @@ type PropsType = {
   demo?: boolean;
 };
 
-export const Todolist = React.memo(function ({
-  demo = false,
-  ...props
-}: PropsType) {
+export const Todolist = React.memo(function({
+                                              demo = false,
+                                              ...props
+                                            }: PropsType) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const Todolist = React.memo(function ({
     (title: string) => {
       props.addTask(title, props.todolist.id);
     },
-    [props.addTask, props.todolist.id],
+    [props.addTask, props.todolist.id]
   );
 
   const removeTodolist = () => {
@@ -58,20 +58,20 @@ export const Todolist = React.memo(function ({
     (title: string) => {
       props.changeTodolistTitle(props.todolist.id, title);
     },
-    [props.todolist.id, props.changeTodolistTitle],
+    [props.todolist.id, props.changeTodolistTitle]
   );
 
   const onAllClickHandler = useCallback(
     () => props.changeFilter("all", props.todolist.id),
-    [props.todolist.id, props.changeFilter],
+    [props.todolist.id, props.changeFilter]
   );
   const onActiveClickHandler = useCallback(
     () => props.changeFilter("active", props.todolist.id),
-    [props.todolist.id, props.changeFilter],
+    [props.todolist.id, props.changeFilter]
   );
   const onCompletedClickHandler = useCallback(
     () => props.changeFilter("completed", props.todolist.id),
-    [props.todolist.id, props.changeFilter],
+    [props.todolist.id, props.changeFilter]
   );
 
   let tasksForTodolist = props.tasks;
@@ -81,7 +81,7 @@ export const Todolist = React.memo(function ({
   }
   if (props.todolist.filter === "completed") {
     tasksForTodolist = props.tasks.filter(
-      (t) => t.status === TaskStatuses.Completed,
+      (t) => t.status === TaskStatuses.Completed
     );
   }
 
@@ -104,7 +104,7 @@ export const Todolist = React.memo(function ({
         disabled={props.todolist.entityStatus === "loading"}
       />
       <div>
-        {tasksForTodolist.map((t) => (
+        {tasksForTodolist?.map((t) => (
           <Task
             key={t.id}
             task={t}
