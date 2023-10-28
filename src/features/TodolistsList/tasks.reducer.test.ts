@@ -197,8 +197,8 @@ test("tasks should be added for todolist", () => {
   // const action = tasksActions.setTasks({ tasks: startState["todolistId1"], todolistId: "todolistId1" });
 
   //1 variant
-  const _action = tasksThunks.fetchTasks.fulfilled(
-    { tasks: startState["todolistId1"], todolistId: "todolistId1" }, "requestId", "todolistId1");
+  // const _action = tasksThunks.fetchTasks.fulfilled(
+  //   { tasks: startState["todolistId1"], todolistId: "todolistId1" }, "requestId", "todolistId1");
 
   //2 variant
   type FetchTasksAction = {
