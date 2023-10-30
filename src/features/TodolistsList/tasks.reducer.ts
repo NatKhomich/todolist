@@ -1,11 +1,12 @@
-import { TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType } from "api/todolists-api";
 import { AppThunk } from "app/store";
-import { handleServerAppError, handleServerNetworkError } from "utils/error-utils";
 import { appActions } from "app/app.reducer";
 import { todolistsActions } from "features/TodolistsList/todolists.reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { clearTasksAndTodolists } from "common/actions/common.actions";
-import { createAppAsyncThunk } from "utils/createAppAsyncThunk";
+import { createAppAsyncThunk } from "common/utils/createAppAsyncThunk";
+import { handleServerAppError, handleServerNetworkError } from "common/utils";
+import { TaskType, todolistsAPI, UpdateTaskModelType } from "features/TodolistsList/todolistsApi";
+import { TaskPriorities, TaskStatuses } from "common/enum/enum";
 
 const initialState: TasksStateType = {};
 
@@ -50,7 +51,6 @@ const addTask = createAppAsyncThunk<
   }
 });
 
-// @ts-ignore
 const updateTask = createAppAsyncThunk<
   { taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string },
   { taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string }
@@ -61,7 +61,6 @@ const updateTask = createAppAsyncThunk<
     const state = getState();
     const task = state.tasks[arg.todolistId].find((t) => t.id === arg.taskId);
     if (!task) {
-      console.warn("task not found in the state");
       return rejectWithValue(null);
     }
 
@@ -96,18 +95,7 @@ const slice = createSlice({
       const tasks = state[action.payload.todolistId];
       const index = tasks.findIndex((t) => t.id === action.payload.taskId);
       if (index !== -1) tasks.splice(index, 1);
-    },
-    // updateTask: (state, action: PayloadAction<{
-    //   taskId: string;
-    //   model: UpdateDomainTaskModelType;
-    //   todolistId: string
-    // }>) => {
-    //   const tasks = state[action.payload.todolistId];
-    //   const index = tasks.findIndex((t) => t.id === action.payload.taskId);
-    //   if (index !== -1) {
-    //     tasks[index] = { ...tasks[index], ...action.payload.model };
-    //   }
-    // }
+    }
   },
   extraReducers: (builder) => {
     builder
