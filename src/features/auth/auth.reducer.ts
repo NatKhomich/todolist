@@ -3,11 +3,12 @@ import {appActions} from 'app/app.reducer';
 import {authAPI, LoginParamsType} from 'features/auth/auth.api';
 import {clearTasksAndTodolists} from 'common/actions';
 import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from 'common/utils';
+import {BaseResponseType} from 'common/types';
 
 const slice = createSlice({
     name: 'auth',
     initialState: {
-        isLoggedIn: false,
+        isLoggedIn: false
     },
     reducers: {},
     extraReducers: builder => {
@@ -38,7 +39,7 @@ const login = createAppAsyncThunk<
             return {isLoggedIn: true}
         } else {
             handleServerAppError(res.data, dispatch);
-            return rejectWithValue(null)
+            return rejectWithValue(res.data)
         }
     } catch (error) {
         handleServerNetworkError(error, dispatch);
@@ -62,8 +63,7 @@ const logout = createAppAsyncThunk<
             handleServerAppError(res.data, dispatch);
             return rejectWithValue(null)
         }
-    }
-    catch (error) {
+    } catch (error) {
         handleServerNetworkError(error, dispatch);
         return rejectWithValue(null)
     }
@@ -79,19 +79,16 @@ const initializeApp = createAppAsyncThunk<
         if (res.data.resultCode === 0) {
             return {isLoggedIn: true}
         } else {
-            handleServerAppError(res.data, dispatch);
+            //handleServerAppError(res.data, dispatch);
             return rejectWithValue(null)
         }
-
     } catch (error) {
         handleServerNetworkError(error, dispatch);
         return rejectWithValue(null)
-    }
-    finally {
+    } finally {
         dispatch(appActions.setAppInitialized({isInitialized: true}))
     }
 })
 
 export const authReducer = slice.reducer;
-export const authActions = slice.actions;
 export const authThunks = {login, logout, initializeApp}
