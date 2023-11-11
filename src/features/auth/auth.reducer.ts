@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {appActions} from 'app/app.reducer';
 import {authAPI, LoginParamsType} from 'features/auth/auth.api';
 import {clearTasksAndTodolists} from 'common/actions';
-import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from 'common/utils';
+import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError, thunkTryCatch} from 'common/utils';
 import {BaseResponseType} from 'common/types';
 
 const slice = createSlice({
@@ -38,7 +38,10 @@ const login = createAppAsyncThunk<
             dispatch(appActions.setAppStatus({status: 'succeeded'}));
             return {isLoggedIn: true}
         } else {
-            handleServerAppError(res.data, dispatch, false);
+            // ❗ Если у нас fieldsErrors есть значит мы будем отображать эти ошибки в конкретном поле
+            // ❗ Если у нас fieldsErrors нету значит отобразим ошибку глобально
+            const isShowAppError = !res.data.fieldsErrors.length
+            handleServerAppError(res.data, dispatch, isShowAppError);
             return rejectWithValue(res.data)
         }
     } catch (error) {
@@ -74,20 +77,30 @@ const initializeApp = createAppAsyncThunk<
     undefined
 >('app/initializeApp', async (_, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI;
-    try {
+    // try {
+    //     const res = await authAPI.me()
+    //     if (res.data.resultCode === 0) {
+    //         return {isLoggedIn: true}
+    //     } else {
+    //         //handleServerAppError(res.data, dispatch);
+    //         return rejectWithValue(null)
+    //     }
+    // } catch (error) {
+    //     handleServerNetworkError(error, dispatch);
+    //     return rejectWithValue(null)
+    // } finally {
+    //     dispatch(appActions.setAppInitialized({isInitialized: true}))
+    // }
+    return thunkTryCatch(thunkAPI, async () => {
         const res = await authAPI.me()
         if (res.data.resultCode === 0) {
             return {isLoggedIn: true}
         } else {
-            //handleServerAppError(res.data, dispatch);
             return rejectWithValue(null)
         }
-    } catch (error) {
-        handleServerNetworkError(error, dispatch);
-        return rejectWithValue(null)
-    } finally {
+    }).finally(() => {
         dispatch(appActions.setAppInitialized({isInitialized: true}))
-    }
+    })
 })
 
 export const authReducer = slice.reducer;

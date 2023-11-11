@@ -41,7 +41,7 @@ export const Login = () => {
             dispatch(authThunks.login(values))
                 .unwrap() //метод createAsyncThunk, в RTK прослойка опр резолв или реджект и зеном и кетчем ловим нужный результат
                 .catch((error: BaseResponseType) => {
-                    error.fieldsErrors.forEach((fieldError) => {
+                    error.fieldsErrors?.forEach((fieldError) => {
                         formikHelpers.setFieldError(fieldError.field, fieldError.error)
                     })
                 })
